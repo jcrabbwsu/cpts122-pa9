@@ -11,5 +11,5 @@ public:
 	~Circle();
 
 	void init();
-	void render(int deltaTime);
+	void update(int deltaTime);
 };
