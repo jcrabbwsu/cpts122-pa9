@@ -32,7 +32,7 @@ void Game::input() {
 void Game::render(sf::Time deltaTime) {
 	window->clear(sf::Color::Black);
 	for (auto gameObject : gameObjects) {
-		gameObject->render(deltaTime.asMilliseconds());
+		gameObject->update(deltaTime.asMilliseconds());
 	}
 	window->display();
 }
