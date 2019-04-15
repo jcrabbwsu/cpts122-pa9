@@ -10,7 +10,7 @@ public:
 	~GameObject();
 
 	virtual void init() = 0;
-	virtual void update(int deltaTime) = 0;
+	virtual void update(double deltaTime) = 0;
 
 	void draw(sf::Drawable &drawable);
 	sf::RenderWindow *getWindow();

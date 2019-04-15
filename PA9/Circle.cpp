@@ -12,18 +12,22 @@ Circle::~Circle() {
 void Circle::init() {
 	circleShape = sf::CircleShape(100.0f);
 	circleShape.setFillColor(sf::Color::White);
-	circleShape.setOrigin(100.0f, 100.0f);
+	circleShape.setOrigin(
+		circleShape.getRadius(),
+		circleShape.getRadius()
+	);
 }
 
-void Circle::update(int deltaTime) {
+void Circle::update(double deltaTime) {
 	offset += deltaTime;
-	float sin = sinf(offset * 0.001);
-	float cos = cosf(offset * 0.001);
+	float sin = sinf(offset);
+	float cos = cosf(offset);
 
 	int midpointX = getWindow()->getSize().x / 2;
 	int midpointY = getWindow()->getSize().y / 2;
 
 	circleShape.setPosition(midpointX + midpointX * sin, midpointY + midpointY * cos);
+	circleShape.setScale(abs(sin), abs(sin));
 
 	sf::Color color = circleShape.getFillColor();
 	color.r = (int)(255 * abs(sin));

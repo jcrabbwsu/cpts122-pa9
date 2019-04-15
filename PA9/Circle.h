@@ -4,12 +4,12 @@
 
 class Circle : public GameObject {
 	sf::CircleShape circleShape;
-	int offset = 0;
+	double offset = 0;
 
 public:
 	Circle();
 	~Circle();
 
 	void init();
-	void update(int deltaTime);
+	void update(double deltaTime);
 };
