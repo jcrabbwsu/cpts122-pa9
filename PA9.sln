@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PA9", "PA9\PA9.vcxproj", "{88BFB8BF-9FBA-4DDC-8546-6D37EB81A345}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PA9-Server", "PA9-Server\PA9-Server.vcxproj", "{5BE9DC18-0A6C-443C-972E-60F6E2660745}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{88BFB8BF-9FBA-4DDC-8546-6D37EB81A345}.Release|x64.Build.0 = Release|x64
 		{88BFB8BF-9FBA-4DDC-8546-6D37EB81A345}.Release|x86.ActiveCfg = Release|Win32
 		{88BFB8BF-9FBA-4DDC-8546-6D37EB81A345}.Release|x86.Build.0 = Release|Win32
+		{5BE9DC18-0A6C-443C-972E-60F6E2660745}.Debug|x64.ActiveCfg = Debug|x64
+		{5BE9DC18-0A6C-443C-972E-60F6E2660745}.Debug|x64.Build.0 = Debug|x64
+		{5BE9DC18-0A6C-443C-972E-60F6E2660745}.Debug|x86.ActiveCfg = Debug|Win32
+		{5BE9DC18-0A6C-443C-972E-60F6E2660745}.Debug|x86.Build.0 = Debug|Win32
+		{5BE9DC18-0A6C-443C-972E-60F6E2660745}.Release|x64.ActiveCfg = Release|x64
+		{5BE9DC18-0A6C-443C-972E-60F6E2660745}.Release|x64.Build.0 = Release|x64
+		{5BE9DC18-0A6C-443C-972E-60F6E2660745}.Release|x86.ActiveCfg = Release|Win32
+		{5BE9DC18-0A6C-443C-972E-60F6E2660745}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
