@@ -3,7 +3,7 @@
 #include <iostream>
 #include <math.h>
 
-Circle::Circle() {
+Circle::Circle(double offset) : offset(offset) {
 }
 
 Circle::~Circle() {

@@ -8,6 +8,7 @@ Game::Game() : window(new sf::RenderWindow(sf::VideoMode(800, 600), "Game")) {
 	window->setVerticalSyncEnabled(true);
 
 	addGameObject(new Circle());
+	addGameObject(new Circle(1000));
 }
 
 Game::~Game() {

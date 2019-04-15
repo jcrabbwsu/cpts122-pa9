@@ -7,7 +7,7 @@ class Circle : public GameObject {
 	double offset = 0;
 
 public:
-	Circle();
+	Circle(double offset = 0);
 	~Circle();
 
 	void init();
