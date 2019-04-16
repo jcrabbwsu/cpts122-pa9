@@ -1,13 +1,15 @@
 #include "Level.h"
 #include "Circle.h"
 
-Level::Level(int newTimer, int newCount, int newFreq) {
+Level::Level(int newTimer, int newCount, int newFreq)
+		: scoreboard(new Scoreboard()) {
 	spawnTimer = newTimer;
 	spawnCount = newCount;
 	spawnFreq = newFreq;
 }
 
 void Level::init() {
+	addChildGameObject(scoreboard);
 }
 
 void Level::update(double deltaTime) {

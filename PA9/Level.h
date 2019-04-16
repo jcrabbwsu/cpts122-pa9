@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include "Scoreboard.h"
 
 class Level : public GameObject {
 	int spawnTimer;
@@ -10,6 +11,8 @@ class Level : public GameObject {
 	 * smaller spawn frequency = faster spawn, larger spawn frequency = slower spawn 
 	 */
 	int spawnFreq; 
+
+	Scoreboard *scoreboard;
 
 public:
 	Level(int newTimer, int newCount, int newFreq);
