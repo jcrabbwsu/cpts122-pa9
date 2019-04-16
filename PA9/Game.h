@@ -1,16 +1,18 @@
 #pragma once
 
 #include "GameObject.h"
+#include "Circle.h"
 
 #include <SFML/Graphics.hpp>
 
 #include <vector>
 
-class Game {
+class Game
+{
+public:
 	sf::RenderWindow *window;
 	std::vector<GameObject *> gameObjects;
 
-public:
 	Game();
 	~Game();
 	

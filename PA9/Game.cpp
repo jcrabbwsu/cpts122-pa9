@@ -1,14 +1,13 @@
 #include "Game.h"
-#include "Circle.h"
 
 #include <iostream>
 
-Game::Game() : window(new sf::RenderWindow(sf::VideoMode(800, 600), "Game")) {
+Game::Game() : window(new sf::RenderWindow(sf::VideoMode(1200, 800), "Game")) {
 	window->setFramerateLimit(60);
 	window->setVerticalSyncEnabled(true);
 
-	addGameObject(new Circle());
-	addGameObject(new Circle(1000));
+	//addGameObject(new Circle());
+	//addGameObject(new Circle(1000));
 }
 
 Game::~Game() {
@@ -24,7 +23,7 @@ void Game::run() {
 		render(clock.restart());
 		frameCount++;
 		if (frameClock.getElapsedTime().asMilliseconds() > 999) {
-			std::cout << "FPS: " << frameCount << std::endl;
+			//std::cout << "FPS: " << frameCount << std::endl;
 			frameCount = 0;
 			frameClock.restart();
 		}
