@@ -8,6 +8,7 @@ class Scoreboard : public GameObject {
 	int score = 0;
 	sf::Font font;
 	sf::Text scoreText;
+	sf::Text livesText;
 
 public:
 	Scoreboard();

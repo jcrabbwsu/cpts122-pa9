@@ -22,10 +22,11 @@ void Scoreboard::init() {
 
 void Scoreboard::update(double deltaTime) {
 	std::ostringstream scoreString;
-	scoreString << "Score: " << score;
+	scoreString << "Score: " << score << std::endl;
+	// TODO: Replace with Player GameObject's life count.
+	scoreString << "Lives: " << 3;
 
 	scoreText.setString(scoreString.str());
-
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
 		addToScore(1);
