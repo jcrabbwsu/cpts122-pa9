@@ -7,11 +7,15 @@ Game::Game() : window(new sf::RenderWindow(sf::VideoMode(800, 600), "Game")) {
 	window->setFramerateLimit(60);
 	window->setVerticalSyncEnabled(true);
 
+	scoreboard = new Scoreboard();
+
+	addGameObject(scoreboard);
 	addGameObject(new Circle());
 	addGameObject(new Circle(1000));
 }
 
 Game::~Game() {
+	delete scoreboard;
 	delete window;
 }
 

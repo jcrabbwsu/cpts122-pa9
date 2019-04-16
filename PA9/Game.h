@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include "Scoreboard.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -8,6 +9,7 @@
 
 class Game {
 	sf::RenderWindow *window;
+	Scoreboard *scoreboard;
 	std::vector<GameObject *> gameObjects;
 
 public:
