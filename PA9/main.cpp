@@ -1,11 +1,10 @@
-#include "Level.h"
+#include "Game.h"
 
-int main(void)
-{
+int main(void) {
+	srand((unsigned int)time(NULL));
 
-	Level level1(1, 1, 30);
-
-	level1.runTheGame();
+	auto game = new Game();
+	game->run();
 
     return 0;
 }

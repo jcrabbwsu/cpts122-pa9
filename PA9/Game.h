@@ -1,25 +1,22 @@
 #pragma once
 
 #include "GameObject.h"
-#include "Scoreboard.h"
-#include "Circle.h"
 
 #include <SFML/Graphics.hpp>
 
-#include <vector>
+class Level;
 
-class Game
-{
-public:
+class Game {
 	sf::RenderWindow *window;
-	Scoreboard *scoreboard;
-	std::vector<GameObject *> gameObjects;
+	Level *level;
 
+public:
 	Game();
 	~Game();
 	
 	void run();
 	void input();
 	void render(sf::Time deltaTime);
-	void addGameObject(GameObject *gameObject);
+
+	sf::RenderWindow *getWindow();
 };

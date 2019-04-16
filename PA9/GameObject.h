@@ -2,8 +2,11 @@
 
 #include <SFML/Graphics.hpp>
 
+class Game;
+
 class GameObject {
-	sf::RenderWindow *window;
+	Game *game;
+	std::vector<GameObject *> children;
 
 public:
 	GameObject();
@@ -12,7 +15,10 @@ public:
 	virtual void init() = 0;
 	virtual void update(double deltaTime) = 0;
 
+	void initInternal();
+	void updateInternal(double deltaTime);
 	void draw(sf::Drawable &drawable);
-	sf::RenderWindow *getWindow();
-	void setWindow(sf::RenderWindow *window);
+	Game *getGame();
+	void setGame(Game *game);
+	void addChildGameObject(GameObject *gameObject);
 };

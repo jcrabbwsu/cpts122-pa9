@@ -2,10 +2,14 @@
 
 #include "GameObject.h"
 
-class Circle : public GameObject
-{
+class Circle : public GameObject {
+	sf::Vector2f mMoveVector;
+	sf::Vector2f mSpawnPoint;
+	int mSpawnWall;
 	sf::CircleShape circleShape;
 	double offset = 0;
+
+	int randomSigned();
 
 public:
 	Circle(double offset = 0);
@@ -16,10 +20,4 @@ public:
 	void setMoveVector();
 	void setSpawnPoint();
 	void setSpawnWall();
-	//void update(double deltaTime, const sf::Vector2f & moveVector);
-private:
-	sf::Vector2f mMoveVector;
-	sf::Vector2f mSpawnPoint;
-	int mSpawnWall;
-	int randomSigned();
 };

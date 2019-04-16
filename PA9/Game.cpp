@@ -1,17 +1,20 @@
 #include "Game.h"
+#include "Level.h"
 
 #include <iostream>
 
-Game::Game() : window(new sf::RenderWindow(sf::VideoMode(1200, 800), "Game")) {
+Game::Game()
+	: window(new sf::RenderWindow(sf::VideoMode(1200, 800), "Game"))
+	, level(new Level(1, 1, 30)) {
 	window->setFramerateLimit(60);
 	window->setVerticalSyncEnabled(true);
 
-	scoreboard = new Scoreboard();
-	addGameObject(scoreboard);
+	level->setGame(this);
+	level->initInternal();
 }
 
 Game::~Game() {
-	delete scoreboard;
+	delete level;
 	delete window;
 }
 
@@ -24,7 +27,7 @@ void Game::run() {
 		render(clock.restart());
 		frameCount++;
 		if (frameClock.getElapsedTime().asMilliseconds() > 999) {
-			//std::cout << "FPS: " << frameCount << std::endl;
+			std::cout << "FPS: " << frameCount << std::endl;
 			frameCount = 0;
 			frameClock.restart();
 		}
@@ -46,14 +49,10 @@ void Game::input() {
 
 void Game::render(sf::Time deltaTime) {
 	window->clear(sf::Color::Black);
-	for (auto gameObject : gameObjects) {
-		gameObject->update(deltaTime.asSeconds());
-	}
+	level->updateInternal(deltaTime.asSeconds());
 	window->display();
 }
 
-void Game::addGameObject(GameObject *gameObject) {
-	gameObject->setWindow(window);
-	gameObject->init();
-	gameObjects.push_back(gameObject);
+sf::RenderWindow *Game::getWindow() {
+	return window;
 }

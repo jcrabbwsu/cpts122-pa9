@@ -1,51 +1,38 @@
 #include "Level.h"
+#include "Circle.h"
 
-Level::Level(int newTimer, int newCount, int newFreq)
-{
-	mSpawnTimer = newTimer;
-	mSpawnCount = newCount;
-	mSpawnFreq = newFreq;
-	
-	srand((unsigned int)time(NULL));
+Level::Level(int newTimer, int newCount, int newFreq) {
+	spawnTimer = newTimer;
+	spawnCount = newCount;
+	spawnFreq = newFreq;
 }
 
-void Level::runTheGame()
-{
-	sf::Clock clock;
-	//spawnNewHostile();
-	while (mTheGame.window->isOpen())
-	{
-		if (mSpawnTimer % mSpawnFreq == 0)
-		{
-			spawnNewHostile();
-		}
-		mTheGame.input();
-		mTheGame.render(clock.restart());
-		mSpawnTimer++;
+void Level::init() {
+}
 
-		if (mSpawnTimer % 50 == 0 && mSpawnFreq > 1)
-		{
-			updateSpawnFreq();
-		}
+void Level::update(double deltaTime) {
+	if (spawnTimer % spawnFreq == 0) {
+		spawnNewHostile();
+	}
+	spawnTimer++;
+
+	if (spawnTimer % 50 == 0 && spawnFreq > 1) {
+		updateSpawnFreq();
 	}
 }
 
-void Level::spawnNewHostile(int value)
-{
-	mTheGame.addGameObject(new Circle(value));
+void Level::spawnNewHostile(int value) {
+	addChildGameObject(new Circle(value));
 }
 
-void Level::updateSpawnCount()
-{
-	mSpawnCount += 1;
+void Level::updateSpawnCount() {
+	spawnCount += 1;
 }
 
-void Level::updateSpawnFreq()
-{
-	mSpawnFreq -= 1;
+void Level::updateSpawnFreq() {
+	spawnFreq -= 1;
 }
 
-const sf::Vector2f & Level::randomVector()
-{
+const sf::Vector2f & Level::randomVector() {
 	return sf::Vector2f(1, 1);
 }

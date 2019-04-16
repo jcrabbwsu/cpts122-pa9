@@ -3,8 +3,7 @@
 #include <iostream>
 #include <math.h>
 
-Circle::Circle(double offset) : offset(offset)
-{
+Circle::Circle(double offset) : offset(offset) {
 	setSpawnWall();
 	setSpawnPoint();
 	setMoveVector();
@@ -27,12 +26,6 @@ void Circle::update(double deltaTime) {
 	offset += deltaTime;
 	float sin = sinf(offset);
 	float cos = cosf(offset);
-
-	//int midpointX = getWindow()->getSize().x / 2;
-	//int midpointY = getWindow()->getSize().y / 2;
-
-	//circleShape.setPosition(midpointX + midpointX * (sin/1.5), midpointY + midpointY * (cos/1.5));
-	//circleShape.setScale(abs(sin), abs(sin));
 
 	circleShape.move(mMoveVector);
 
@@ -66,7 +59,7 @@ void Circle::setMoveVector()
 		break;
 	case 3://spawn from bottom wall
 		mMoveVector = sf::Vector2f(((rand() % 10) + 1)*(1 / rand() % 100 + 1)*(randomSigned()),
-			((rand() % 10) + 1)*(1 / rand() % 100 + 1) * -1 );
+			((rand() % 10) + 1)*(1 / rand() % 100 + 1) * -1);
 		break;
 	default:
 		mMoveVector = sf::Vector2f(0, 0);
@@ -96,13 +89,11 @@ void Circle::setSpawnPoint()
 	}
 }
 
-void Circle::setSpawnWall()
-{
+void Circle::setSpawnWall() {
 	mSpawnWall = rand() % 4;
 }
 
-int Circle::randomSigned()
-{
+int Circle::randomSigned() {
 	int flip = rand() % 2;
 
 	if (flip == 0)
@@ -114,26 +105,3 @@ int Circle::randomSigned()
 		return 1;
 	}
 }
-
-//void Circle::update(double deltaTime, const sf::Vector2f & moveVector)
-//{
-//	offset += deltaTime;
-//	float sin = sinf(offset);
-//	float cos = cosf(offset);
-//
-//	int midpointX = getWindow()->getSize().x / 2;
-//	int midpointY = getWindow()->getSize().y / 2;
-//
-//	circleShape.setPosition(midpointX + midpointX * (sin / 1.5), midpointY + midpointY * (cos / 1.5));
-//	circleShape.setScale(abs(sin), abs(sin));
-//
-//	circleShape.move(moveVector);
-//
-//	sf::Color color = circleShape.getFillColor();
-//	color.r = (int)(255 * abs(sin));
-//	color.g = (int)(255 * abs(cos));
-//	color.b = (int)(255 * abs(sin));
-//	circleShape.setFillColor(color);
-//
-//	draw(circleShape);
-//}
