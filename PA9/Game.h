@@ -2,17 +2,19 @@
 
 #include "GameObject.h"
 #include "Scoreboard.h"
+#include "Circle.h"
 
 #include <SFML/Graphics.hpp>
 
 #include <vector>
 
-class Game {
+class Game
+{
+public:
 	sf::RenderWindow *window;
 	Scoreboard *scoreboard;
 	std::vector<GameObject *> gameObjects;
 
-public:
 	Game();
 	~Game();
 	

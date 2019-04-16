@@ -1,8 +1,11 @@
-#include "Game.h"
+#include "Level.h"
 
-int main() {
-	auto game = new Game();
-	game->run();
+int main(void)
+{
+
+	Level level1(1, 1, 30);
+
+	level1.runTheGame();
 
     return 0;
 }
