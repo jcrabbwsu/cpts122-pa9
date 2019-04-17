@@ -22,11 +22,22 @@ bool GameObject::getOutOfBounds()
 }
 
 void GameObject::updateInternal(double deltaTime) {
+	//std::cout << "Size of vector: " << children.size() << std::endl;
 	update(deltaTime);
 
 	for (auto child : children) {
-		child->updateInternal(deltaTime);
+		if (!child->isDisposed()) {
+			child->updateInternal(deltaTime);
+		} else {
+			deletedChildren.push_back(child);
+		}
 	}
+
+	for (auto deletedChild : deletedChildren) {
+		children.erase(std::remove(children.begin(), children.end(), deletedChild), children.end());
+		delete deletedChild;
+	}
+	deletedChildren.clear();
 }
 
 void GameObject::draw(sf::Drawable &drawable) {
@@ -45,4 +56,12 @@ void GameObject::addChildGameObject(GameObject *gameObject) {
 	gameObject->setGame(game);
 	gameObject->init();
 	children.push_back(gameObject);
+}
+
+void GameObject::dispose() {
+	disposed = true;
+}
+
+bool GameObject::isDisposed() {
+	return disposed;
 }
