@@ -35,7 +35,7 @@ void Level::outOfBounds()
 
 		if (child->getOutOfBounds())
 		{
-			cout << "I have gone out of bounds.  Please delete me." << endl;
+			child->dispose();
 		}
 	}
 

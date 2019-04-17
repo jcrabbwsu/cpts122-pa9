@@ -39,6 +39,11 @@ public:
 	std::vector<GameObject *> children;
 
 	/// <summary>
+	/// Vector of pointers to temporary deleted children GameObjects.
+	/// </summary>
+	std::vector<GameObject *> deletedChildren;
+
+	/// <summary>
 	/// Default deconstructor for GameObject.
 	/// </summary>
 	~GameObject();
