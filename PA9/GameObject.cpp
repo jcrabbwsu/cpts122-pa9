@@ -19,7 +19,11 @@ void GameObject::updateInternal(double deltaTime) {
 	update(deltaTime);
 
 	for (auto child : children) {
-		child->updateInternal(deltaTime);
+		if (!child->isDisposed()) {
+			child->updateInternal(deltaTime);
+		} else {
+			delete child;
+		}
 	}
 }
 
@@ -39,4 +43,12 @@ void GameObject::addChildGameObject(GameObject *gameObject) {
 	gameObject->setGame(game);
 	gameObject->init();
 	children.push_back(gameObject);
+}
+
+void GameObject::dispose() {
+	dispose = true;
+}
+
+bool GameObject::isDisposed() {
+	return dispose;
 }

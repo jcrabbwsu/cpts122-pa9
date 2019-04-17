@@ -13,6 +13,11 @@ class Game;
 /// </summary>
 class GameObject {
 	/// <summary>
+	/// Whether or not this object is disposed.
+	/// </summary>
+	bool disposed = false;
+
+	/// <summary>
 	/// Pointer to the current game.
 	/// </summary>
 	Game *game;
@@ -82,4 +87,15 @@ public:
 	/// </summary>
 	/// <param name="gameObject">GameObject to add as a child</param>
 	void addChildGameObject(GameObject *gameObject);
+
+	/// <summary>
+	/// Dispose of this GameObject.
+	/// </summary>
+	void dispose();
+
+	/// <summary>
+	/// Determines whether or not this GameObject is disposed.
+	/// </summary>
+	/// <returns>True if GameObject is disposed.</returns>
+	bool isDisposed();
 };
