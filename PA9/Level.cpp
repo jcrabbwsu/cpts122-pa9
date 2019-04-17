@@ -1,5 +1,6 @@
 #include "Level.h"
 #include "Circle.h"
+#include "Enemies.h"
 
 Level::Level(int newTimer, int newCount, int newFreq)
 		: scoreboard(new Scoreboard()) {
@@ -21,10 +22,31 @@ void Level::update(double deltaTime) {
 	if (spawnTimer % 50 == 0 && spawnFreq > 1) {
 		updateSpawnFreq();
 	}
+
+	outOfBounds();
+}
+
+void Level::outOfBounds()
+{
+
+	for (auto child : children)
+	{
+		child->setOutOfBounds();
+
+		if (child->getOutOfBounds())
+		{
+			cout << "I have gone out of bounds.  Please delete me." << endl;
+		}
+	}
+
+}
+
+void Level::setOutOfBounds()
+{
 }
 
 void Level::spawnNewHostile(int value) {
-	addChildGameObject(new Circle(value));
+	addChildGameObject(new Circle());
 }
 
 void Level::updateSpawnCount() {

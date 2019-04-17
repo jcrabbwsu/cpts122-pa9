@@ -1,6 +1,10 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 class Game;
 
@@ -22,16 +26,17 @@ class GameObject {
 	/// </summary>
 	Game *game;
 
-	/// <summary>
-	/// Vector of pointers to children GameObjects.
-	/// </summary>
-	std::vector<GameObject *> children;
 
 public:
 	/// <summary>
 	/// Default constructor for GameObject.
 	/// </summary>
 	GameObject();
+
+	/// <summary>
+	/// Vector of pointers to children GameObjects.
+	/// </summary>
+	std::vector<GameObject *> children;
 
 	/// <summary>
 	/// Default deconstructor for GameObject.
@@ -57,6 +62,11 @@ public:
 	/// Internal init function, called only from Game and this class.
 	/// </summary>
 	void initInternal();
+
+	//check if object is out of bounds and set mOutOfBounds to true if it is
+	virtual void setOutOfBounds() = 0;
+	bool mOutOfBounds;
+	bool getOutOfBounds();
 
 	/// <summary>
 	/// Internal update function called only from Game and this class.
