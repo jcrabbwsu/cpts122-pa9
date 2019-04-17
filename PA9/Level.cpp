@@ -1,5 +1,6 @@
 #include "Level.h"
 #include "Circle.h"
+#include "Enemies.h"
 
 Level::Level(int newTimer, int newCount, int newFreq)
 		: scoreboard(new Scoreboard()) {
@@ -24,7 +25,7 @@ void Level::update(double deltaTime) {
 }
 
 void Level::spawnNewHostile(int value) {
-	addChildGameObject(new Circle(value));
+	addChildGameObject(new Enemies());
 }
 
 void Level::updateSpawnCount() {
