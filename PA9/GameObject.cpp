@@ -46,9 +46,9 @@ void GameObject::addChildGameObject(GameObject *gameObject) {
 }
 
 void GameObject::dispose() {
-	dispose = true;
+	disposed = true;
 }
 
 bool GameObject::isDisposed() {
-	return dispose;
+	return disposed;
 }
