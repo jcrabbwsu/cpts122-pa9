@@ -2,6 +2,7 @@
 #include "Game.h"
 
 GameObject::GameObject() {
+	mOutOfBounds = false;
 }
 
 GameObject::~GameObject() {
@@ -13,6 +14,11 @@ void GameObject::initInternal() {
 	for (auto child : children) {
 		child->initInternal();
 	}
+}
+
+bool GameObject::getOutOfBounds()
+{
+	return mOutOfBounds;
 }
 
 void GameObject::updateInternal(double deltaTime) {

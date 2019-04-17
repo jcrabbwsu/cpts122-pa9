@@ -93,6 +93,31 @@ void Circle::setSpawnWall() {
 	mSpawnWall = rand() % 4;
 }
 
+void Circle::setOutOfBounds()
+{
+	const sf::Vector2f currentPos = this->circleShape.getPosition();
+	const sf::Vector2u windowBounds = this->getGame()->getWindow()->getSize();
+	const int offset = 10;
+
+	if (currentPos.x < 0 - offset)
+	{
+		mOutOfBounds = true;
+	}
+	else if (currentPos.x > windowBounds.x + offset)
+	{
+		mOutOfBounds = true;
+	}
+	else if (currentPos.y < 0 - offset)
+	{
+		mOutOfBounds = true;
+	}
+	else if (currentPos.y > windowBounds.y + offset)
+	{
+		mOutOfBounds = true;
+	}
+
+}
+
 int Circle::randomSigned() {
 	int flip = rand() % 2;
 

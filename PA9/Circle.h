@@ -1,8 +1,11 @@
 #pragma once
 
 #include "GameObject.h"
+#include "Game.h"
+#include "Enemies.h"
 
-class Circle : public GameObject {
+class Circle : public Enemies
+{
 	sf::Vector2f mMoveVector;
 	sf::Vector2f mSpawnPoint;
 	int mSpawnWall;
@@ -17,6 +20,7 @@ public:
 
 	void init();
 	void update(double deltaTime);
+	void setOutOfBounds();
 	void setMoveVector();
 	void setSpawnPoint();
 	void setSpawnWall();

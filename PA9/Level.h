@@ -33,6 +33,8 @@ public:
 	/// <param name="deltaTime">Time between frames</param>
 	void update(double deltaTime);
 
+	void outOfBounds();//delete objects that have exited the window area
+	void setOutOfBounds();
 	void spawnNewHostile(int value = 0);
 	void updateSpawnCount();
 	void updateSpawnFreq();

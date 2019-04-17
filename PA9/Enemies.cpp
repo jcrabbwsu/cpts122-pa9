@@ -51,3 +51,7 @@ void Enemies::update(double deltaTime)
 {
 	draw(this->enemyShape);
 }
+
+void Enemies::setOutOfBounds()
+{
+}

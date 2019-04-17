@@ -12,8 +12,9 @@ public:
 	void setSize();
 	void init();
 	void update(double deltaTime);
+	virtual void setOutOfBounds();
 
-public:
+public://protected?
 	float mMoveVector;
 	sf::Vector2f mSpawnPoint;
 	float mMoveSpeed;

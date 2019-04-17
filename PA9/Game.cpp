@@ -24,7 +24,7 @@ void Game::run() {
 	short frameCount = 0;
 	while (window->isOpen()) {
 		input();
-		render(clock.restart());
+		render(clock.restart());//contains level update
 		frameCount++;
 		if (frameClock.getElapsedTime().asMilliseconds() > 999) {
 			std::cout << "FPS: " << frameCount << std::endl;
