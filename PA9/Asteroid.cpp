@@ -10,10 +10,10 @@ Asteroid::~Asteroid() {
 }
 
 void Asteroid::init() {
-	setSpawnWall();
-	setSpawnPoint();
-	setMoveVector();
-	circleShape = sf::CircleShape(10.0f);
+	setSpawnWall();//randomly choose top/left/bottom/right window border
+	setSpawnPoint();//choose random location on the spawn wall
+	setMoveVector();//set a random vector that travels at some angle into the room
+	circleShape = sf::CircleShape(35.0f);
 	circleShape.setFillColor(sf::Color::White);
 	circleShape.setPosition(mSpawnPoint);
 	circleShape.setOrigin(
@@ -43,23 +43,26 @@ void Asteroid::setMoveVector()
 	//the ratio of the first term in each vector value (x,y) determines the angle, second term sets the speed
 	//and randomSigned() allows the angle to randomly be up/down or left/right depending on the wall spawning the object
 	
+	const int asteroidSpeed = 2000; // use to adjust asteroid speed, larger speed value = slower asteroid movement speed
+	int asteroidAngle = (rand() % 4) + 1;//sets a random trajectory for the asteroid
+
 	switch (mSpawnWall)
 	{
 	case 0://spawn from left wall
-		mMoveVector = sf::Vector2f((/*first term*/(rand() % 10) + 1)*/*second term*/(1 / rand() % 200 + 1),
-			((rand() % 10) + 1)*(1 / rand() % 200 + 1)*(randomSigned()));
+		mMoveVector = sf::Vector2f((asteroidAngle)*(1 / asteroidSpeed + 1),
+			(asteroidAngle)*(1 / asteroidSpeed + 1)*(randomSigned()));
 		break;
 	case 1://spawn from top wall
-		mMoveVector = sf::Vector2f(((rand() % 10) + 1)*(1 / rand() % 200 + 1)*(randomSigned()),
-			((rand() % 10) + 1)*(1 / rand() % 200 + 1));
+		mMoveVector = sf::Vector2f((asteroidAngle)*(1 / asteroidSpeed + 1)*(randomSigned()),
+			(asteroidAngle)*(1 / asteroidSpeed + 1));
 		break;
 	case 2://spawn from right wall
-		mMoveVector = sf::Vector2f(((rand() % 10) + 1)*(1 / rand() % 200 + 1)* -1 ,
-			((rand() % 10) + 1)*(1 / rand() % 200 + 1)*(randomSigned()));
+		mMoveVector = sf::Vector2f((asteroidAngle)*(1 / asteroidSpeed + 1)* -1 ,
+			(asteroidAngle)*(1 / asteroidSpeed + 1)*(randomSigned()));
 		break;
 	case 3://spawn from bottom wall
-		mMoveVector = sf::Vector2f(((rand() % 10) + 1)*(1 / rand() % 200 + 1)*(randomSigned()),
-			((rand() % 10) + 1)*(1 / rand() % 200 + 1) * -1);
+		mMoveVector = sf::Vector2f((asteroidAngle)*(1 / asteroidSpeed + 1)*(randomSigned()),
+			(asteroidAngle)*(1 / asteroidSpeed + 1) * -1);
 		break;
 	default:
 		mMoveVector = sf::Vector2f(0, 0);

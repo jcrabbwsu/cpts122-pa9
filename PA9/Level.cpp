@@ -9,7 +9,7 @@ Level::Level(int newTimer, int newCount, int newFreq)
 	spawnTimer = newTimer;
 	spawnCount = newCount;
 	spawnFreqAsteroid = newFreq;
-	spawnFreqUFO = 400;
+	spawnFreqUFO = 500;
 }
 
 void Level::init() {
@@ -28,7 +28,7 @@ void Level::update(double deltaTime) {
 	spawnTimer++;
 
 	//increase spawn rate of enemies over time
-	if (spawnTimer % 200 == 0 && spawnFreqAsteroid > 1) {
+	if (spawnTimer % 800 == 0 && spawnFreqAsteroid > 1) {
 		updateSpawnFreq();
 	}
 

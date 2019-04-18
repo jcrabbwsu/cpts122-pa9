@@ -4,6 +4,17 @@
 #include "Game.h"
 #include "Enemies.h"
 
+/**********************************************************
+*  BULLET CLASS
+* GameObject -> Enemies -> Bullet
+* This class is used by UFOs and the player.
+* "Friendly" player bullets have mIFF = true, 
+* "hostile" UFO bullets have mIFF = false.
+* mIFF is checked at collision to determine whether an interaction occurs
+* (for example, so the player can't kill themself on their own bullets
+* or so UFOs can't destroy asteroids).
+**********************************************************/
+
 class Bullet : public Enemies
 {
 	sf::Vector2f mMoveVector;
@@ -23,5 +34,5 @@ public:
 	void setOutOfBounds();
 	void setMoveVector();
 	void setSpawnPoint();
-	bool getIFF();
+	bool getIFF();//--------------use this to report bullet type (player or UFO) to collision detection functions
 };

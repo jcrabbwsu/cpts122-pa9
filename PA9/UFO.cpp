@@ -11,13 +11,13 @@ UFO::~UFO() {
 }
 
 void UFO::init() {
-	shotCounter = 0;
-	setSpawnWall();
+	shotCounter = 0;//determines whether UFO fires a bullet or not
+	setSpawnWall();//for UFO class this top/bottom left or top/bottom right
 	setSpawnPoint();
-	setMoveVector();
-	circleShape = sf::CircleShape(100.0f);
+	setMoveVector();//either straight left or straight right from spawn point
+	circleShape = sf::CircleShape(75.0f);
 	circleShape.setFillColor(sf::Color::White);
-	circleShape.setPosition(mSpawnPoint);
+	circleShape.setPosition(mSpawnPoint);//set initial position as determined by spawn point
 	circleShape.setOrigin(
 		circleShape.getRadius(),
 		circleShape.getRadius()
@@ -37,9 +37,9 @@ void UFO::update(double deltaTime) {
 	color.b = (int)(255 * abs(sin));
 	circleShape.setFillColor(color);
 
-	shotCounter++;
+	shotCounter++;//increment shot counter each cycle
 
-	if (shotCounter % 100 == 0)
+	if (shotCounter % 75 == 0)//fire a bullet every 75 cycles
 	{
 		addChildGameObject(new Bullet(false, circleShape.getPosition(), 0.0));
 	}
@@ -49,16 +49,19 @@ void UFO::update(double deltaTime) {
 
 void UFO::setMoveVector()
 {
-	//the ratio of the first term in each vector value (x,y) determines the angle, second term sets the speed
-	//and randomSigned() allows the angle to randomly be up/down or left/right depending on the wall spawning the object
-
 	switch (mSpawnWall)
 	{
-	case 0://spawn from left wall
-		mMoveVector = sf::Vector2f(3,0);
+	case 0://spawn from top left wall
+		mMoveVector = sf::Vector2f(4,0);
 		break;
-	case 1://spawn from right wall
-		mMoveVector = sf::Vector2f(-3,0);
+	case 1://spawn from bottom left wall
+		mMoveVector = sf::Vector2f(4, 0);
+		break;
+	case 2://spawn from top right wall
+		mMoveVector = sf::Vector2f(-4,0);
+		break;
+	case 3://spawn from bottom right wall
+		mMoveVector = sf::Vector2f(-4, 0);
 		break;
 	default:
 		mMoveVector = sf::Vector2f(0, 0);
@@ -72,11 +75,17 @@ void UFO::setSpawnPoint()
 
 	switch (mSpawnWall)
 	{
-	case 0://spawn from left wall
-		mSpawnPoint = sf::Vector2f(0, rand() % windowSize.y);
+	case 0://spawn from top left wall
+		mSpawnPoint = sf::Vector2f(0, 100);
 		break;
-	case 1://spawn from right wall
-		mSpawnPoint = sf::Vector2f(windowSize.x, rand() % windowSize.y);
+	case 1://spawn from bottom left wall
+		mSpawnPoint = sf::Vector2f(0, windowSize.y - 100);
+		break;
+	case 2://spawn from top right wall
+		mSpawnPoint = sf::Vector2f(windowSize.x, 100);
+		break;
+	case 3://spawn from bottom right wall
+		mSpawnPoint = sf::Vector2f(windowSize.x, windowSize.y - 100);
 		break;
 	default:
 		mSpawnPoint = sf::Vector2f(0, 0);
@@ -85,9 +94,10 @@ void UFO::setSpawnPoint()
 }
 
 void UFO::setSpawnWall() {
-	mSpawnWall = rand() % 2;
+	mSpawnWall = rand() % 4;//set spawn location randomly to one of four possible locations
 }
 
+//see comments in Bullet.cpp
 void UFO::setOutOfBounds()
 {
 	const sf::Vector2f currentPos = this->circleShape.getPosition();

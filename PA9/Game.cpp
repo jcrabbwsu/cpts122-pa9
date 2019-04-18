@@ -5,7 +5,7 @@
 
 Game::Game()
 	: window(new sf::RenderWindow(sf::VideoMode(1200, 800), "Game"))
-	, level(new Level(1, 1, 30)) {
+	, level(new Level(1, 1, 150)) {
 	window->setFramerateLimit(60);
 	window->setVerticalSyncEnabled(true);
 
