@@ -4,19 +4,19 @@
 #include "Game.h"
 #include "Enemies.h"
 
-class Circle : public Enemies
+class UFO : public Enemies
 {
 	sf::Vector2f mMoveVector;
 	sf::Vector2f mSpawnPoint;
 	int mSpawnWall;
 	sf::CircleShape circleShape;
 	double offset = 0;
-
+	int shotCounter;
 	int randomSigned();
 
 public:
-	Circle(double offset = 0);
-	~Circle();
+	UFO(double offset = 0);
+	~UFO();
 
 	void init();
 	void update(double deltaTime);
