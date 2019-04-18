@@ -13,7 +13,7 @@ public:
 	void init();
 	void update(double deltaTime);
 
-public:
+public: //protected??
 	float mMoveVector;
 	sf::Vector2f mSpawnPoint;
 	float mMoveSpeed;

@@ -1,27 +1,27 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "GameObject.h"
 
-class Ship : public sf::CircleShape
+class Ship : public GameObject
 {
-	Ship(sf::Vector2f &size, sf::Color color, sf::Vector2f &position) : sf::CircleShape(size)
-	{
-		this->setFillColor(color);
-		this->setPosition(position);
-	}
-	
+public:
+	Ship(sf::Vector2f &size, sf::Color color, sf::Vector2f &spawnPoint, float rotationAngle);
+	~Ship();
+
 	void moveForward();
 	void turnLeft();
 	void turnRight();
+	void fire();
 
-	/*
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-	{
-		p1Paddle.move(0, -.01);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-	{
-		p2Paddle.move(0, -.01);
-	}
-	*/
+	void init();
+	void update(double deltaTime);
+
+private:
+	sf::Vector2f mSize;
+	sf::Color mColor;
+	sf::Vector2f mPosition;
+	float mFacing;
+	float mMoveSpeed;
+
+	sf::RectangleShape shipShape;
 };
