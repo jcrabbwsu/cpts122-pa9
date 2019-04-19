@@ -17,6 +17,10 @@ class Level : public GameObject {
 	/// Pointer to the Scoreboard.
 	/// </summary>
 	Scoreboard *scoreboard;
+	/// <summary>
+	/// Pointer to the ship.
+	/// </summary>
+	Ship *playerShip;
 
 public:
 	Level(int newTimer, int newCount, int newFreq);

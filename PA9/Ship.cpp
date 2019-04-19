@@ -1,21 +1,11 @@
 #include "Ship.h"
 
-/*
-if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-{
-p1Paddle.move(0, -.01);
-}
-if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-{
-p2Paddle.move(0, -.01);
-}
-*/
-
 Ship::Ship(sf::Vector2f &size, sf::Color color, sf::Vector2f &spawnPoint, float rotationAngle) {
 	this->mSize = size;
 	this->mColor = color;
 	this->mPosition = spawnPoint;
 	this->mFacing = rotationAngle;
+	//this->mBoundary = (window.getsize().x, window.getsize().y)
 }
 
 Ship::~Ship() {
@@ -23,8 +13,15 @@ Ship::~Ship() {
 }
 
 void Ship::moveForward() {
-	//sf::Vector2f facing = ();
-	//this->shipShape.move(facing);
+	float r = 2.0, X = 0.0, Y = 0.0;
+	float theta = this->shipShape.getRotation();
+
+	sf::Vector2f shipPosition = this->shipShape.getPosition();
+
+	X = r*cos(theta);
+	Y = r*sin(theta);
+
+	this->shipShape.move(X + shipPosition.x, Y + shipPosition.y);
 }
 
 void Ship::turnLeft() {
@@ -36,7 +33,7 @@ void Ship::turnRight() {
 }
 
 void Ship::fire() {
-
+	//new Bullet(true, this->shipShape.getPosition(), )
 }
 
 void Ship::init() {
@@ -46,5 +43,30 @@ void Ship::init() {
 }
 
 void Ship::update(double deltaTime) {
-	this->draw(shipShape);
+	GameObject::draw(shipShape);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		moveForward();
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		turnLeft();
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		turnRight();
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		fire();
+	}
+}
+
+void Ship::setOutOfBounds()
+{
+
 }

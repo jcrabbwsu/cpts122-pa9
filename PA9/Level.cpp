@@ -3,9 +3,10 @@
 #include "Enemies.h"
 #include "UFO.h"
 #include "Bullet.h"
+#include "Ship.h"
 
 Level::Level(int newTimer, int newCount, int newFreq)
-		: scoreboard(new Scoreboard()) {
+		: scoreboard(new Scoreboard()) { //, playerShip(new Ship(50, sf::Color::Magenta, (500,500), 0)) {
 	spawnTimer = newTimer;
 	spawnCount = newCount;
 	spawnFreqAsteroid = newFreq;
@@ -14,6 +15,7 @@ Level::Level(int newTimer, int newCount, int newFreq)
 
 void Level::init() {
 	addChildGameObject(scoreboard);
+	//addChildGameObject(playerShip);
 }
 
 void Level::update(double deltaTime) {
