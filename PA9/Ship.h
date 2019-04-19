@@ -1,10 +1,9 @@
 #pragma once
 
 #include "GameObject.h"
-#include "Bullet.h"
 #include <math.h>
 
-class Ship : public GameObject , public Bullet
+class Ship : public GameObject
 {
 public:
 	Ship(sf::Vector2f &size, sf::Color color, sf::Vector2f &spawnPoint, float rotationAngle);

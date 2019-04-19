@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "Scoreboard.h"
+#include "Ship.h"
 
 class Level : public GameObject {
 	int spawnTimer;
