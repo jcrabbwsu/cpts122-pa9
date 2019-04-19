@@ -4,7 +4,7 @@
 #include <iostream>
 #include <math.h>
 
-UFO::UFO(double offset) : offset(offset) {
+UFO::UFO() {
 }
 
 UFO::~UFO() {
@@ -15,36 +15,27 @@ void UFO::init() {
 	setSpawnWall();//for UFO class this top/bottom left or top/bottom right
 	setSpawnPoint();
 	setMoveVector();//either straight left or straight right from spawn point
-	circleShape = sf::CircleShape(75.0f);
-	circleShape.setFillColor(sf::Color::White);
-	circleShape.setPosition(mSpawnPoint);//set initial position as determined by spawn point
-	circleShape.setOrigin(
-		circleShape.getRadius(),
-		circleShape.getRadius()
+	ufoTexture.loadFromFile("alien.png");
+	ufoSprite.setTexture(ufoTexture);
+	ufoSprite.setScale(0.2, 0.2);
+	ufoSprite.setOrigin(
+		ufoTexture.getSize().x / 2,
+		ufoTexture.getSize().y / 2
 	);
+	ufoSprite.setPosition(mSpawnPoint);//set initial position as determined by spawn point
 }
 
 void UFO::update(double deltaTime) {
-	offset += deltaTime;
-	float sin = sinf(offset);
-	float cos = cosf(offset);
-
-	circleShape.move(mMoveVector);
-
-	sf::Color color = circleShape.getFillColor();
-	color.r = (int)(255 * abs(sin));
-	color.g = (int)(255 * abs(cos));
-	color.b = (int)(255 * abs(sin));
-	circleShape.setFillColor(color);
+	ufoSprite.move(mMoveVector);
 
 	shotCounter++;//increment shot counter each cycle
 
 	if (shotCounter % 75 == 0)//fire a bullet every 75 cycles
 	{
-		addChildGameObject(new Bullet(false, circleShape.getPosition(), 0.0));
+		addChildGameObject(new Bullet(false, ufoSprite.getPosition(), 0.0));
 	}
 
-	draw(circleShape);
+	draw(ufoSprite);
 }
 
 void UFO::setMoveVector()
@@ -100,7 +91,7 @@ void UFO::setSpawnWall() {
 //see comments in Bullet.cpp
 void UFO::setOutOfBounds()
 {
-	const sf::Vector2f currentPos = this->circleShape.getPosition();
+	const sf::Vector2f currentPos = this->ufoSprite.getPosition();
 	const sf::Vector2u windowBounds = this->getGame()->getWindow()->getSize();
 	const int offset = 10;
 

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <math.h>
 
-Asteroid::Asteroid(double offset) : offset(offset) {
+Asteroid::Asteroid() : offset() {
 }
 
 Asteroid::~Asteroid() {
@@ -13,29 +13,22 @@ void Asteroid::init() {
 	setSpawnWall();//randomly choose top/left/bottom/right window border
 	setSpawnPoint();//choose random location on the spawn wall
 	setMoveVector();//set a random vector that travels at some angle into the room
-	circleShape = sf::CircleShape(35.0f);
-	circleShape.setFillColor(sf::Color::White);
-	circleShape.setPosition(mSpawnPoint);
-	circleShape.setOrigin(
-		circleShape.getRadius(),
-		circleShape.getRadius()
+	spinDirection = rand() % 2;
+	spinScale = rand() % 4;
+	asteroidTexture.loadFromFile("alien.png");
+	asteroidSprite.setTexture(asteroidTexture);
+	asteroidSprite.setScale(0.2, 0.2);
+	asteroidSprite.setOrigin(
+		asteroidTexture.getSize().x / 2,
+		asteroidTexture.getSize().y / 2
 	);
+	asteroidSprite.setPosition(mSpawnPoint);
 }
 
 void Asteroid::update(double deltaTime) {
-	offset += deltaTime;
-	float sin = sinf(offset);
-	float cos = cosf(offset);
-
-	circleShape.move(mMoveVector);
-
-	sf::Color color = circleShape.getFillColor();
-	color.r = (int)(255 * abs(sin));
-	color.g = (int)(255 * abs(cos));
-	color.b = (int)(255 * abs(sin));
-	circleShape.setFillColor(color);
-
-	draw(circleShape);
+	asteroidSprite.rotate(deltaTime * 40 * spinScale * spinDirection ? 1 : -1);
+	asteroidSprite.move(mMoveVector);
+	draw(asteroidSprite);
 }
 
 void Asteroid::setMoveVector()
@@ -100,7 +93,7 @@ void Asteroid::setSpawnWall() {
 
 void Asteroid::setOutOfBounds()
 {
-	const sf::Vector2f currentPos = this->circleShape.getPosition();
+	const sf::Vector2f currentPos = this->asteroidSprite.getPosition();
 	const sf::Vector2u windowBounds = this->getGame()->getWindow()->getSize();
 	const int offset = 10;
 
