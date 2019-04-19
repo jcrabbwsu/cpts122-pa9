@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -9,15 +8,22 @@
     <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Enemies.cpp" />
     <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="Asteroid.cpp" />
+    <ClCompile Include="UFO.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Circle.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Scoreboard.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="Ship.h" />
+    <ClInclude Include="Asteroid.h" />
+    <ClInclude Include="UFO.h" />
+    <ClInclude Include="Bullet.h" />
+
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

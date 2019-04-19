@@ -10,7 +10,8 @@ class Level : public GameObject {
 	/// <summary>
 	/// smaller spawn frequency = faster spawn, larger spawn frequency = slower spawn 
 	/// </summary>
-	int spawnFreq; 
+	int spawnFreqAsteroid; 
+	int spawnFreqUFO;
 
 	/// <summary>
 	/// Pointer to the Scoreboard.
@@ -33,8 +34,11 @@ public:
 	/// <param name="deltaTime">Time between frames</param>
 	void update(double deltaTime);
 
+	void outOfBounds();//delete objects that have exited the window area
+	void setOutOfBounds();//detect whether objects have left the bounds of the window
 	void spawnNewHostile(int value = 0);
 	void updateSpawnCount();
-	void updateSpawnFreq();
+	void updateSpawnFreq();//only operates on asteroid spawn rate
 	const sf::Vector2f &randomVector();
+	void spawnBullet(int IFF, sf::Vector2f & spawnPoint);
 };

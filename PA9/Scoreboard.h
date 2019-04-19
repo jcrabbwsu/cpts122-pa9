@@ -26,6 +26,7 @@ class Scoreboard : public GameObject {
 public:
 	Scoreboard();
 	~Scoreboard();
+	virtual void setOutOfBounds();
 
 	/// <summary>
 	/// Create Font and Text objects.

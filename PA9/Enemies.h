@@ -12,8 +12,9 @@ public:
 	void setSize();
 	void init();
 	void update(double deltaTime);
+	virtual void setOutOfBounds();
 
-public: //protected??
+public://protected?
 	float mMoveVector;
 	sf::Vector2f mSpawnPoint;
 	float mMoveSpeed;
@@ -21,6 +22,5 @@ public: //protected??
 	float mSize;
 
 	sf::Vector2f mCollisionType;
-
 	sf::CircleShape enemyShape;
 };

@@ -3,6 +3,12 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+
+
+using std::cout;
+using std::endl;
+
+
 class Game;
 
 /// <summary>
@@ -14,20 +20,31 @@ class Game;
 /// </summary>
 class GameObject {
 	/// <summary>
+	/// Whether or not this object is disposed.
+	/// </summary>
+	bool disposed = false;
+
+	/// <summary>
 	/// Pointer to the current game.
 	/// </summary>
 	Game *game;
 
-	/// <summary>
-	/// Vector of pointers to children GameObjects.
-	/// </summary>
-	std::vector<GameObject *> children;
 
 public:
 	/// <summary>
 	/// Default constructor for GameObject.
 	/// </summary>
 	GameObject();
+
+	/// <summary>
+	/// Vector of pointers to children GameObjects.
+	/// </summary>
+	std::vector<GameObject *> children;
+
+	/// <summary>
+	/// Vector of pointers to temporary deleted children GameObjects.
+	/// </summary>
+	std::vector<GameObject *> deletedChildren;
 
 	/// <summary>
 	/// Default deconstructor for GameObject.
@@ -53,6 +70,11 @@ public:
 	/// Internal init function, called only from Game and this class.
 	/// </summary>
 	void initInternal();
+
+	//check if object is out of bounds and set mOutOfBounds to true if it is
+	virtual void setOutOfBounds() = 0;
+	bool mOutOfBounds;
+	bool getOutOfBounds();
 
 	/// <summary>
 	/// Internal update function called only from Game and this class.
@@ -83,4 +105,15 @@ public:
 	/// </summary>
 	/// <param name="gameObject">GameObject to add as a child</param>
 	void addChildGameObject(GameObject *gameObject);
+
+	/// <summary>
+	/// Dispose of this GameObject.
+	/// </summary>
+	void dispose();
+
+	/// <summary>
+	/// Determines whether or not this GameObject is disposed.
+	/// </summary>
+	/// <returns>True if GameObject is disposed.</returns>
+	bool isDisposed();
 };

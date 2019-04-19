@@ -9,6 +9,10 @@ Scoreboard::Scoreboard() {
 Scoreboard::~Scoreboard() {
 }
 
+void Scoreboard::setOutOfBounds()
+{
+}
+
 void Scoreboard::init() {
 	if (!font.loadFromFile("kongtext.ttf")) {
 		std::cerr << "Failed to load font" << std::endl;
