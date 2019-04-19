@@ -19,13 +19,16 @@ class Asteroid : public Enemies
 	sf::Vector2f mMoveVector;
 	sf::Vector2f mSpawnPoint;
 	int mSpawnWall;
-	sf::CircleShape circleShape;
+	sf::Texture asteroidTexture;
+	sf::Sprite asteroidSprite;
 	double offset = 0;
+	bool spinDirection;
+	int spinScale;
 
 	int randomSigned();
 
 public:
-	Asteroid(double offset = 0);
+	Asteroid();
 	~Asteroid();
 
 	void init();

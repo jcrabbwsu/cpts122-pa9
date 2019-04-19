@@ -20,13 +20,13 @@ class UFO : public Enemies
 	sf::Vector2f mMoveVector;
 	sf::Vector2f mSpawnPoint;
 	int mSpawnWall;
-	sf::CircleShape circleShape;
-	double offset = 0;
+	sf::Texture ufoTexture;
+	sf::Sprite ufoSprite;
 	int shotCounter;
 	int randomSigned();
 
 public:
-	UFO(double offset = 0);
+	UFO();
 	~UFO();
 
 	void init();
