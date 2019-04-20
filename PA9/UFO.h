@@ -24,6 +24,7 @@ class UFO : public Enemies
 	sf::Sprite ufoSprite;
 	int shotCounter;
 	int randomSigned();
+	sf::FloatRect getBounds();
 
 public:
 	UFO();

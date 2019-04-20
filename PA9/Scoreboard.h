@@ -23,6 +23,8 @@ class Scoreboard : public GameObject {
 	/// </summary>
 	sf::Text scoreText;
 
+	sf::Clock totalTime;
+
 public:
 	Scoreboard();
 	~Scoreboard();
@@ -51,4 +53,6 @@ public:
 	/// </summary>
 	/// <param name="score">Score to add to current score</param>
 	void addToScore(int score);
+
+	sf::FloatRect getBounds();
 };

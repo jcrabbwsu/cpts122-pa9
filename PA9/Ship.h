@@ -5,11 +5,21 @@
 
 class Ship : public GameObject
 {
+	float mFacing;
+	float mMoveSpeed;
+	float x = 0;
+	float y = 0;
+	sf::Vector2f mBoundary;
+
+	sf::Sprite shipSprite;
+	sf::Texture shipTexture;
+	sf::Clock shootClock;
+
 public:
-	Ship(sf::Vector2f &size, sf::Color color, sf::Vector2f &spawnPoint, float rotationAngle);
+	Ship();
 	~Ship();
 
-	void moveForward();
+	void moveForward(double deltaTime);
 	void turnLeft();
 	void turnRight();
 	void fire();
@@ -17,16 +27,7 @@ public:
 	void init();
 	void update(double deltaTime);
 	void setOutOfBounds();
-
-private:
-	sf::Vector2f mSize;
-	sf::Color mColor;
-	sf::Vector2f mPosition;
-	float mFacing;
-	float mMoveSpeed;
-	sf::Vector2f mBoundary;
-
-	sf::RectangleShape shipShape;
+	sf::FloatRect getBounds();
 
 	/*=====================
 	Notes:

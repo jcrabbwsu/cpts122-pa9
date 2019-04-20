@@ -24,15 +24,21 @@ class Bullet : public Enemies
 	double offset = 0;
 	bool mIFF;//-----------------true = player bullet, false = enemy bullet, controls what the bullet will collide with
 	int randomSigned();
+	float x = 0;
+	float y = 0;
+	float angle = 0.0;
 
 public:
-	Bullet(bool IFF, sf::Vector2f spawnPoint, double offset = 0);//---NOTE: requires different arguments from init of other enemy classes
+	Bullet(bool IFF, sf::Vector2f spawnPoint);//---NOTE: requires different arguments from init of other enemy classes
 	~Bullet();
 
 	void init();
 	void update(double deltaTime);
 	void setOutOfBounds();
-	void setMoveVector();
+	void setMoveVector(double deltaTime);
+	void setAngle(double angle);
 	void setSpawnPoint();
+	void moveForward(double deltaTime);
 	bool getIFF();//--------------use this to report bullet type (player or UFO) to collision detection functions
+	sf::FloatRect getBounds();
 };

@@ -38,6 +38,11 @@ void GameObject::updateInternal(double deltaTime) {
 		delete deletedChild;
 	}
 	deletedChildren.clear();
+
+	for (auto addedChild : addedChildren) {
+		children.push_back(addedChild);
+	}
+	addedChildren.clear();
 }
 
 void GameObject::draw(sf::Drawable &drawable) {
@@ -55,7 +60,7 @@ void GameObject::setGame(Game *game) {
 void GameObject::addChildGameObject(GameObject *gameObject) {
 	gameObject->setGame(game);
 	gameObject->init();
-	children.push_back(gameObject);
+	addedChildren.push_back(gameObject);
 }
 
 void GameObject::dispose() {
@@ -64,4 +69,10 @@ void GameObject::dispose() {
 
 bool GameObject::isDisposed() {
 	return disposed;
+}
+
+GameObject *GameObject::doesChildIntersectWith(GameObject *gameObject) {
+	for (auto child : children) {
+	}
+	return nullptr;
 }

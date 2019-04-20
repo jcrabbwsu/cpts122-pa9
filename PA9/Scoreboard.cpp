@@ -27,13 +27,13 @@ void Scoreboard::init() {
 void Scoreboard::update(double deltaTime) {
 	std::ostringstream scoreString;
 	scoreString << "Score: " << score << std::endl;
-	// TODO: Replace with Player GameObject's life count.
 	scoreString << "Lives: " << 3;
 
 	scoreText.setString(scoreString.str());
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+	if (totalTime.getElapsedTime().asSeconds() > 1.0) {
 		addToScore(1);
+		totalTime.restart();
 	}
 
 	draw(scoreText);
@@ -45,4 +45,8 @@ int Scoreboard::getScore() {
 
 void Scoreboard::addToScore(int score) {
 	this->score += score;
+}
+
+sf::FloatRect Scoreboard::getBounds() {
+	return scoreText.getGlobalBounds();
 }

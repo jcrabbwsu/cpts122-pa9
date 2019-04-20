@@ -42,4 +42,10 @@ public:
 	/// </summary>
 	/// <returns>Pointer for sf::RenderWindow</returns>
 	sf::RenderWindow *getWindow();
+
+	/// <summary>
+	/// Get the pointer for the level of the game.
+	/// </summary>
+	/// <returns>Level pointer</returns>
+	Level *getLevel();
 };

@@ -32,7 +32,7 @@ void UFO::update(double deltaTime) {
 
 	if (shotCounter % 75 == 0)//fire a bullet every 75 cycles
 	{
-		addChildGameObject(new Bullet(false, ufoSprite.getPosition(), 0.0));
+		addChildGameObject(new Bullet(false, ufoSprite.getPosition()));
 	}
 
 	draw(ufoSprite);
@@ -125,4 +125,8 @@ int UFO::randomSigned() {
 	{
 		return 1;
 	}
+}
+
+sf::FloatRect UFO::getBounds() {
+	return ufoSprite.getGlobalBounds();
 }

@@ -17,7 +17,7 @@ void Asteroid::init() {
 	spinScale = rand() % 4;
 	asteroidTexture.loadFromFile("alien.png");
 	asteroidSprite.setTexture(asteroidTexture);
-	asteroidSprite.setScale(0.2, 0.2);
+	asteroidSprite.setScale(0.1, 0.1);
 	asteroidSprite.setOrigin(
 		asteroidTexture.getSize().x / 2,
 		asteroidTexture.getSize().y / 2
@@ -127,4 +127,8 @@ int Asteroid::randomSigned() {
 	{
 		return 1;
 	}
+}
+
+sf::FloatRect Asteroid::getBounds() {
+	return asteroidSprite.getGlobalBounds();
 }

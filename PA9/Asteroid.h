@@ -37,4 +37,6 @@ public:
 	void setMoveVector();
 	void setSpawnPoint();
 	void setSpawnWall();
+
+	sf::FloatRect getBounds();
 };

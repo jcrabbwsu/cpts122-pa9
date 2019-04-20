@@ -6,7 +6,7 @@
 //IFF: true for player bullets, false for UFO bullets
 //spawnPoint: use circleShape.getPosition() for the spawning object (player or UFO)
 //offset: Logan can fill this in?
-Bullet::Bullet(bool IFF, sf::Vector2f spawnPoint, double offset) : offset(offset) {
+Bullet::Bullet(bool IFF, sf::Vector2f spawnPoint) {
 	mIFF = IFF;
 	mSpawnPoint = spawnPoint;
 }
@@ -15,7 +15,7 @@ Bullet::~Bullet() {
 }
 
 void Bullet::init() {
-	setMoveVector();
+	setMoveVector(0);
 	circleShape = sf::CircleShape(5.0f);
 	circleShape.setFillColor(sf::Color::White);
 	circleShape.setPosition(mSpawnPoint);
@@ -26,11 +26,14 @@ void Bullet::init() {
 }
 
 void Bullet::update(double deltaTime) {
+	if (mIFF) {
+		moveForward(deltaTime);
+	}
 	circleShape.move(mMoveVector);//moves the bullet
 	draw(circleShape);//draws the bullet
 }
 
-void Bullet::setMoveVector()
+void Bullet::setMoveVector(double deltaTime)
 {
 	if (mIFF == false)//UFO bullet
 	{
@@ -45,11 +48,21 @@ void Bullet::setMoveVector()
 		mMoveVector.x = (windowCenter.x / bulletSpeed1) - (mSpawnPoint.x / bulletSpeed1);
 		mMoveVector.y = (windowCenter.y / bulletSpeed1) - (mSpawnPoint.y / bulletSpeed1);
 	}
-	else//player bullet
-	{
-		int bulletSpeed2 = 75; //use to adjust bullet speed
+}
 
-	}
+void Bullet::moveForward(double deltaTime) {
+	float r = 750;
+	x = 0;
+	y = 0;
+	float theta = (angle - 90) * (3.1415 / 180.0);
+
+	sf::Vector2f shipPosition = circleShape.getPosition();
+
+	x += r * cos(theta) * deltaTime;
+	y += r * sin(theta) * deltaTime;
+
+	//circleShape.move(x, y);
+	mMoveVector = sf::Vector2f(x, y);
 }
 
 //not used for Bullet, set when new Bullet is created
@@ -99,4 +112,12 @@ int Bullet::randomSigned() {
 	{
 		return 1;
 	}
+}
+
+void Bullet::setAngle(double angle) {
+	this->angle = angle;
+}
+
+sf::FloatRect Bullet::getBounds() {
+	return circleShape.getGlobalBounds();
 }

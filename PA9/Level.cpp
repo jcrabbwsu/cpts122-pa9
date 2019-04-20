@@ -6,7 +6,8 @@
 #include "Ship.h"
 
 Level::Level(int newTimer, int newCount, int newFreq)
-		: scoreboard(new Scoreboard()) { //, playerShip(new Ship(50, sf::Color::Magenta, (500,500), 0)) {
+		: scoreboard(new Scoreboard())
+		, playerShip(new Ship()) {
 	spawnTimer = newTimer;
 	spawnCount = newCount;
 	spawnFreqAsteroid = newFreq;
@@ -15,7 +16,7 @@ Level::Level(int newTimer, int newCount, int newFreq)
 
 void Level::init() {
 	addChildGameObject(scoreboard);
-	//addChildGameObject(playerShip);
+	addChildGameObject(playerShip);
 }
 
 void Level::update(double deltaTime) {
@@ -30,7 +31,7 @@ void Level::update(double deltaTime) {
 	spawnTimer++;
 
 	//increase spawn rate of enemies over time
-	if (spawnTimer % 800 == 0 && spawnFreqAsteroid > 1) {
+	if (spawnTimer % 50 == 0 && spawnFreqAsteroid > 1) {
 		updateSpawnFreq();
 	}
 
@@ -85,5 +86,9 @@ const sf::Vector2f & Level::randomVector() {
 
 void Level::spawnBullet(int IFF, sf::Vector2f & spawnPoint)
 {
-	new Bullet(IFF, spawnPoint, 0.0);
+	new Bullet(IFF, spawnPoint);
+}
+
+sf::FloatRect Level::getBounds() {
+	return sf::FloatRect();
 }

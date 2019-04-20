@@ -41,6 +41,8 @@ public:
 	/// </summary>
 	std::vector<GameObject *> children;
 
+	std::vector<GameObject *> addedChildren;
+
 	/// <summary>
 	/// Vector of pointers to temporary deleted children GameObjects.
 	/// </summary>
@@ -116,4 +118,8 @@ public:
 	/// </summary>
 	/// <returns>True if GameObject is disposed.</returns>
 	bool isDisposed();
+
+	GameObject *doesChildIntersectWith(GameObject *gameObject);
+
+	virtual sf::FloatRect getBounds() = 0;
 };

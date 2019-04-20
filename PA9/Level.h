@@ -46,4 +46,5 @@ public:
 	void updateSpawnFreq();//only operates on asteroid spawn rate
 	const sf::Vector2f &randomVector();
 	void spawnBullet(int IFF, sf::Vector2f & spawnPoint);
+	sf::FloatRect getBounds();
 };
