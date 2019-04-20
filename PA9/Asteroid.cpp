@@ -1,9 +1,12 @@
 #include "Asteroid.h"
+#include "Game.h"
+#include "Level.h"
+#include "Bullet.h"
 
 #include <iostream>
 #include <math.h>
 
-Asteroid::Asteroid() : offset() {
+Asteroid::Asteroid() {
 }
 
 Asteroid::~Asteroid() {
@@ -28,19 +31,26 @@ void Asteroid::init() {
 void Asteroid::update(double deltaTime) {
 	asteroidSprite.rotate(deltaTime * 40 * spinScale * spinDirection ? 1 : -1);
 	asteroidSprite.move(mMoveVector);
+
+	auto intersectingObjects = getGame()->getLevel()->getIntersectingChildren(this);
+
+	for (auto intersect : intersectingObjects) {
+		if (auto bullet = dynamic_cast<Bullet *>(intersect)) {
+			dispose();
+		}
+	}
+
 	draw(asteroidSprite);
 }
 
-void Asteroid::setMoveVector()
-{
+void Asteroid::setMoveVector() {
 	//the ratio of the first term in each vector value (x,y) determines the angle, second term sets the speed
 	//and randomSigned() allows the angle to randomly be up/down or left/right depending on the wall spawning the object
 	
 	const int asteroidSpeed = 2000; // use to adjust asteroid speed, larger speed value = slower asteroid movement speed
 	int asteroidAngle = (rand() % 4) + 1;//sets a random trajectory for the asteroid
 
-	switch (mSpawnWall)
-	{
+	switch (mSpawnWall) {
 	case 0://spawn from left wall
 		mMoveVector = sf::Vector2f((asteroidAngle)*(1 / asteroidSpeed + 1),
 			(asteroidAngle)*(1 / asteroidSpeed + 1)*(randomSigned()));
@@ -63,8 +73,7 @@ void Asteroid::setMoveVector()
 	}
 }
 
-void Asteroid::setSpawnPoint()
-{
+void Asteroid::setSpawnPoint() {
 	sf::Vector2u windowSize = this->getGame()->getWindow()->getSize();
 
 	switch (mSpawnWall)
@@ -91,40 +100,29 @@ void Asteroid::setSpawnWall() {
 	mSpawnWall = rand() % 4;
 }
 
-void Asteroid::setOutOfBounds()
-{
+bool Asteroid::isOutOfBounds() {
 	const sf::Vector2f currentPos = this->asteroidSprite.getPosition();
 	const sf::Vector2u windowBounds = this->getGame()->getWindow()->getSize();
 	const int offset = 10;
 
-	if (currentPos.x < 0 - offset)
-	{
-		mOutOfBounds = true;
+	if (currentPos.x < 0 - offset) {
+		return true;
+	} else if (currentPos.x > windowBounds.x + offset) {
+		return true;
+	} else if (currentPos.y < 0 - offset) {
+		return true;
+	} else if (currentPos.y > windowBounds.y + offset) {
+		return true;
 	}
-	else if (currentPos.x > windowBounds.x + offset)
-	{
-		mOutOfBounds = true;
-	}
-	else if (currentPos.y < 0 - offset)
-	{
-		mOutOfBounds = true;
-	}
-	else if (currentPos.y > windowBounds.y + offset)
-	{
-		mOutOfBounds = true;
-	}
-
+	return false;
 }
 
 int Asteroid::randomSigned() {
 	int flip = rand() % 2;
 
-	if (flip == 0)
-	{
+	if (flip == 0) {
 		return -1;
-	}
-	else
-	{
+	} else {
 		return 1;
 	}
 }

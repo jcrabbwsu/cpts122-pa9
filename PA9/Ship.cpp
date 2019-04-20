@@ -2,12 +2,13 @@
 #include "Game.h"
 #include "Bullet.h"
 #include "Level.h"
+#include "Asteroid.h"
+#include "UFO.h"
 
 Ship::Ship() {
 }
 
 Ship::~Ship() {
-	delete this;
 }
 
 void Ship::init() {
@@ -26,7 +27,6 @@ void Ship::init() {
 
 void Ship::update(double deltaTime) {
 	const float rotateScalar = 180.0;
-	draw(shipSprite);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
@@ -52,6 +52,24 @@ void Ship::update(double deltaTime) {
 	{
 		fire();
 	}
+
+	auto intersectingObjects = getGame()->getLevel()->getIntersectingChildren(this);
+
+	for (auto intersect : intersectingObjects) {
+		if (auto bullet = dynamic_cast<Bullet *>(intersect)) {
+			if (!bullet->getIFF()) {
+				dispose();
+			}
+		}
+		if (auto asteroid = dynamic_cast<Asteroid *>(intersect)) {
+			dispose();
+		}
+		if (auto ufo = dynamic_cast<UFO *>(intersect)) {
+			dispose();
+		}
+	}
+
+	draw(shipSprite);
 }
 
 void Ship::moveForward(double deltaTime) {
@@ -86,8 +104,9 @@ void Ship::fire() {
 	shootClock.restart();
 }
 
-void Ship::setOutOfBounds()
-{
+bool Ship::isOutOfBounds() {
+	// TODO
+	return false;
 }
 
 sf::FloatRect Ship::getBounds() {

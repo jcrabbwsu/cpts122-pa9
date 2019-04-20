@@ -23,12 +23,15 @@ class Scoreboard : public GameObject {
 	/// </summary>
 	sf::Text scoreText;
 
-	sf::Clock totalTime;
+	/// <summary>
+	/// Score timer 
+	/// </summary>
+	sf::Clock scoreTimer;
 
 public:
 	Scoreboard();
 	~Scoreboard();
-	virtual void setOutOfBounds();
+	virtual bool isOutOfBounds();
 
 	/// <summary>
 	/// Create Font and Text objects.

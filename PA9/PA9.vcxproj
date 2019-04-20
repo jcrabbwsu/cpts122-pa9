@@ -149,7 +149,7 @@
   <ItemGroup>
     <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Enemies.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -157,19 +157,17 @@
     <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="UFO.cpp" />
-
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asteroid.h" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Enemies.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Scoreboard.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="UFO.h" />
-
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

@@ -9,8 +9,8 @@ Scoreboard::Scoreboard() {
 Scoreboard::~Scoreboard() {
 }
 
-void Scoreboard::setOutOfBounds()
-{
+bool Scoreboard::isOutOfBounds() {
+	return false;
 }
 
 void Scoreboard::init() {
@@ -31,9 +31,9 @@ void Scoreboard::update(double deltaTime) {
 
 	scoreText.setString(scoreString.str());
 
-	if (totalTime.getElapsedTime().asSeconds() > 1.0) {
+	if (scoreTimer.getElapsedTime().asSeconds() > 1.0) {
 		addToScore(1);
-		totalTime.restart();
+		scoreTimer.restart();
 	}
 
 	draw(scoreText);

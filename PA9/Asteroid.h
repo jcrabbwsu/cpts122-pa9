@@ -2,11 +2,11 @@
 
 #include "GameObject.h"
 #include "Game.h"
-#include "Enemies.h"
+#include "Entity.h"
 
 /**********************************************************
 *  ASTEROID CLASS
-* GameObject -> Enemies -> Asteroid
+* GameObject -> Entity -> Asteroid
 * This class is used for the Asteroid-type enemy.  They spawn at an
 * increasing rate from any window border, travel at varying speeds
 * across the screen. Collision with the player destroys the
@@ -14,14 +14,13 @@
 * the asteroid and grants points to the player.
 **********************************************************/
 
-class Asteroid : public Enemies
+class Asteroid : public Entity
 {
 	sf::Vector2f mMoveVector;
 	sf::Vector2f mSpawnPoint;
 	int mSpawnWall;
 	sf::Texture asteroidTexture;
 	sf::Sprite asteroidSprite;
-	double offset = 0;
 	bool spinDirection;
 	int spinScale;
 
@@ -33,7 +32,7 @@ public:
 
 	void init();
 	void update(double deltaTime);
-	void setOutOfBounds();
+	bool isOutOfBounds();
 	void setMoveVector();
 	void setSpawnPoint();
 	void setSpawnWall();

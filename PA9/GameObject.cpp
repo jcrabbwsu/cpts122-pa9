@@ -2,7 +2,6 @@
 #include "Game.h"
 
 GameObject::GameObject() {
-	mOutOfBounds = false;
 }
 
 GameObject::~GameObject() {
@@ -14,11 +13,6 @@ void GameObject::initInternal() {
 	for (auto child : children) {
 		child->initInternal();
 	}
-}
-
-bool GameObject::getOutOfBounds()
-{
-	return mOutOfBounds;
 }
 
 void GameObject::updateInternal(double deltaTime) {
@@ -71,8 +65,16 @@ bool GameObject::isDisposed() {
 	return disposed;
 }
 
-GameObject *GameObject::doesChildIntersectWith(GameObject *gameObject) {
+std::vector<GameObject *> GameObject::getIntersectingChildren(GameObject *gameObject) {
+	std::vector<GameObject *> gameObjects;
+
 	for (auto child : children) {
+		if (child->getBounds().intersects(gameObject->getBounds())) {
+			gameObjects.push_back(child);
+		}
 	}
-	return nullptr;
+
+	return gameObjects;
 }
+
+

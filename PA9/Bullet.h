@@ -2,11 +2,11 @@
 
 #include "GameObject.h"
 #include "Game.h"
-#include "Enemies.h"
+#include "Entity.h"
 
 /**********************************************************
 *  BULLET CLASS
-* GameObject -> Enemies -> Bullet
+* GameObject -> Entity -> Bullet
 * This class is used by UFOs and the player.
 * "Friendly" player bullets have mIFF = true, 
 * "hostile" UFO bullets have mIFF = false.
@@ -15,12 +15,12 @@
 * or so UFOs can't destroy asteroids).
 **********************************************************/
 
-class Bullet : public Enemies
+class Bullet : public Entity
 {
 	sf::Vector2f mMoveVector;
 	sf::Vector2f mSpawnPoint;
 	int mSpawnWall;
-	sf::CircleShape circleShape;
+	sf::CircleShape bulletShape;
 	double offset = 0;
 	bool mIFF;//-----------------true = player bullet, false = enemy bullet, controls what the bullet will collide with
 	int randomSigned();
@@ -34,7 +34,7 @@ public:
 
 	void init();
 	void update(double deltaTime);
-	void setOutOfBounds();
+	bool isOutOfBounds();
 	void setMoveVector(double deltaTime);
 	void setAngle(double angle);
 	void setSpawnPoint();

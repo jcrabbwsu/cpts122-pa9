@@ -1,5 +1,7 @@
 #include "UFO.h"
 #include "Bullet.h"
+#include "Game.h"
+#include "Level.h"
 
 #include <iostream>
 #include <math.h>
@@ -11,10 +13,10 @@ UFO::~UFO() {
 }
 
 void UFO::init() {
-	shotCounter = 0;//determines whether UFO fires a bullet or not
-	setSpawnWall();//for UFO class this top/bottom left or top/bottom right
+	setSpawnWall(); //for UFO class this top/bottom left or top/bottom right
 	setSpawnPoint();
-	setMoveVector();//either straight left or straight right from spawn point
+	setMoveVector(); //either straight left or straight right from spawn point
+
 	ufoTexture.loadFromFile("alien.png");
 	ufoSprite.setTexture(ufoTexture);
 	ufoSprite.setScale(0.2, 0.2);
@@ -28,11 +30,21 @@ void UFO::init() {
 void UFO::update(double deltaTime) {
 	ufoSprite.move(mMoveVector);
 
-	shotCounter++;//increment shot counter each cycle
+	if (shootClock.getElapsedTime().asMilliseconds() > 1250) {
+		getGame()->getLevel()->addChildGameObject(
+			new Bullet(false, ufoSprite.getPosition())
+		);
+		shootClock.restart();
+	}
 
-	if (shotCounter % 75 == 0)//fire a bullet every 75 cycles
-	{
-		addChildGameObject(new Bullet(false, ufoSprite.getPosition()));
+	auto intersectingObjects = getGame()->getLevel()->getIntersectingChildren(this);
+
+	for (auto intersect : intersectingObjects) {
+		if (auto bullet = dynamic_cast<Bullet *>(intersect)) {
+			if (bullet->getIFF()) {
+				dispose();
+			}
+		}
 	}
 
 	draw(ufoSprite);
@@ -40,8 +52,7 @@ void UFO::update(double deltaTime) {
 
 void UFO::setMoveVector()
 {
-	switch (mSpawnWall)
-	{
+	switch (mSpawnWall) {
 	case 0://spawn from top left wall
 		mMoveVector = sf::Vector2f(4,0);
 		break;
@@ -60,22 +71,20 @@ void UFO::setMoveVector()
 	}
 }
 
-void UFO::setSpawnPoint()
-{
+void UFO::setSpawnPoint() {
 	sf::Vector2u windowSize = this->getGame()->getWindow()->getSize();
 
-	switch (mSpawnWall)
-	{
-	case 0://spawn from top left wall
+	switch (mSpawnWall) {
+	case 0: //spawn from top left wall
 		mSpawnPoint = sf::Vector2f(0, 100);
 		break;
-	case 1://spawn from bottom left wall
+	case 1: //spawn from bottom left wall
 		mSpawnPoint = sf::Vector2f(0, windowSize.y - 100);
 		break;
-	case 2://spawn from top right wall
+	case 2: //spawn from top right wall
 		mSpawnPoint = sf::Vector2f(windowSize.x, 100);
 		break;
-	case 3://spawn from bottom right wall
+	case 3: //spawn from bottom right wall
 		mSpawnPoint = sf::Vector2f(windowSize.x, windowSize.y - 100);
 		break;
 	default:
@@ -89,40 +98,29 @@ void UFO::setSpawnWall() {
 }
 
 //see comments in Bullet.cpp
-void UFO::setOutOfBounds()
-{
+bool UFO::isOutOfBounds() {
 	const sf::Vector2f currentPos = this->ufoSprite.getPosition();
 	const sf::Vector2u windowBounds = this->getGame()->getWindow()->getSize();
 	const int offset = 10;
 
-	if (currentPos.x < 0 - offset)
-	{
-		mOutOfBounds = true;
+	if (currentPos.x < 0 - offset) {
+		return true;
+	} else if (currentPos.x > windowBounds.x + offset) {
+		return true;
+	} else if (currentPos.y < 0 - offset) {
+		return true;
+	} else if (currentPos.y > windowBounds.y + offset) {
+		return true;
 	}
-	else if (currentPos.x > windowBounds.x + offset)
-	{
-		mOutOfBounds = true;
-	}
-	else if (currentPos.y < 0 - offset)
-	{
-		mOutOfBounds = true;
-	}
-	else if (currentPos.y > windowBounds.y + offset)
-	{
-		mOutOfBounds = true;
-	}
-
+	return false;
 }
 
 int UFO::randomSigned() {
 	int flip = rand() % 2;
 
-	if (flip == 0)
-	{
+	if (flip == 0) {
 		return -1;
-	}
-	else
-	{
+	} else {
 		return 1;
 	}
 }

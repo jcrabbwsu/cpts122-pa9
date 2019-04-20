@@ -1,13 +1,6 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
-
-
-
-using std::cout;
-using std::endl;
-
 
 class Game;
 
@@ -74,9 +67,7 @@ public:
 	void initInternal();
 
 	//check if object is out of bounds and set mOutOfBounds to true if it is
-	virtual void setOutOfBounds() = 0;
-	bool mOutOfBounds;
-	bool getOutOfBounds();
+	virtual bool isOutOfBounds() = 0;
 
 	/// <summary>
 	/// Internal update function called only from Game and this class.
@@ -119,7 +110,7 @@ public:
 	/// <returns>True if GameObject is disposed.</returns>
 	bool isDisposed();
 
-	GameObject *doesChildIntersectWith(GameObject *gameObject);
+	std::vector<GameObject *> getIntersectingChildren(GameObject *gameObject);
 
 	virtual sf::FloatRect getBounds() = 0;
 };

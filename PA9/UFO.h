@@ -2,11 +2,11 @@
 
 #include "GameObject.h"
 #include "Game.h"
-#include "Enemies.h"
+#include "Entity.h"
 
 /**********************************************************
 *  UFO CLASS
-* GameObject -> Enemies -> UFO
+* GameObject -> Entity -> UFO
 * This class is used for the UFO-type enemy.  They spawn at a 
 * fixed rate from either the left or right window border,
 * travel slowly and periodically fire bullets towards the
@@ -14,17 +14,15 @@
 * collision with "friendly"-type bullets (player bullets) destroys
 * the UFO, granting points to the player.
 **********************************************************/
-
-class UFO : public Enemies
-{
+class UFO : public Entity {
 	sf::Vector2f mMoveVector;
 	sf::Vector2f mSpawnPoint;
 	int mSpawnWall;
 	sf::Texture ufoTexture;
 	sf::Sprite ufoSprite;
-	int shotCounter;
 	int randomSigned();
 	sf::FloatRect getBounds();
+	sf::Clock shootClock;
 
 public:
 	UFO();
@@ -32,7 +30,7 @@ public:
 
 	void init();
 	void update(double deltaTime);
-	void setOutOfBounds();
+	bool isOutOfBounds();
 	void setMoveVector();
 	void setSpawnPoint();
 	void setSpawnWall();

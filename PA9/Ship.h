@@ -26,7 +26,7 @@ public:
 
 	void init();
 	void update(double deltaTime);
-	void setOutOfBounds();
+	bool isOutOfBounds();
 	sf::FloatRect getBounds();
 
 	/*=====================

@@ -1,6 +1,6 @@
 #include "Level.h"
 #include "Asteroid.h"
-#include "Enemies.h"
+#include "Entity.h"
 #include "UFO.h"
 #include "Bullet.h"
 #include "Ship.h"
@@ -21,11 +21,12 @@ void Level::init() {
 
 void Level::update(double deltaTime) {
 	if (spawnTimer % spawnFreqAsteroid == 0) {
-		spawnNewHostile(1);//spawn an asteroid based on spawnFreqAsteroid
+		// Spawn an asteroid based on spawnFreqAsteroid
+		spawnNewHostile(1);
 	}
-	if (spawnTimer % spawnFreqUFO == 0)
-	{
-		spawnNewHostile(2);//spawn a UFO based on UFO spawnFreqUFO
+	if (spawnTimer % spawnFreqUFO == 0) {
+		// Spawn a UFO based on UFO spawnFreqUFO
+		spawnNewHostile(2);
 	}
 
 	spawnTimer++;
@@ -35,32 +36,20 @@ void Level::update(double deltaTime) {
 		updateSpawnFreq();
 	}
 
-	outOfBounds();//check and mark all enemies that are out of bounds for deletion
-}
-
-void Level::outOfBounds()
-{
-
-	for (auto child : children)
-	{
-		child->setOutOfBounds();
-
-		if (child->getOutOfBounds())
-		{
+	// Check and mark all enemies that are out of bounds for deletion.
+	for (auto child : children) {
+		if (child->isOutOfBounds()) {
 			child->dispose();
 		}
 	}
-
 }
 
-void Level::setOutOfBounds()
-{
+bool Level::isOutOfBounds() {
+	return false;
 }
 
 void Level::spawnNewHostile(int value) {
-
-	switch (value)
-	{
+	switch (value) {
 	case 1://spawn an asteroid if value is 1
 		addChildGameObject(new Asteroid());
 		break;
@@ -82,11 +71,6 @@ void Level::updateSpawnFreq() {
 
 const sf::Vector2f & Level::randomVector() {
 	return sf::Vector2f(1, 1);
-}
-
-void Level::spawnBullet(int IFF, sf::Vector2f & spawnPoint)
-{
-	new Bullet(IFF, spawnPoint);
 }
 
 sf::FloatRect Level::getBounds() {

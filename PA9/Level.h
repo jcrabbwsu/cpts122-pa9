@@ -27,9 +27,7 @@ public:
 	Level(int newTimer, int newCount, int newFreq);
 
 	/// <summary>
-	/// Create the Scoreboard.
-	/// TODO: Add player, other entities which will only
-	/// spawn once.
+	/// Initialize the Level.
 	/// </summary>
 	void init();
 
@@ -39,12 +37,10 @@ public:
 	/// <param name="deltaTime">Time between frames</param>
 	void update(double deltaTime);
 
-	void outOfBounds();//delete objects that have exited the window area
-	void setOutOfBounds();//detect whether objects have left the bounds of the window
+	bool isOutOfBounds();
 	void spawnNewHostile(int value = 0);
 	void updateSpawnCount();
-	void updateSpawnFreq();//only operates on asteroid spawn rate
+	void updateSpawnFreq();
 	const sf::Vector2f &randomVector();
-	void spawnBullet(int IFF, sf::Vector2f & spawnPoint);
 	sf::FloatRect getBounds();
 };
