@@ -36,6 +36,7 @@ void Asteroid::update(double deltaTime) {
 
 	for (auto intersect : intersectingObjects) {
 		if (auto bullet = dynamic_cast<Bullet *>(intersect)) {
+			getGame()->getLevel()->getScoreboard()->addToScore(2);
 			dispose();
 		}
 	}

@@ -23,6 +23,13 @@ void Ship::init() {
 		shipTexture.getSize().y / 2
 	);
 	shipSprite.setPosition(location);
+
+	//playerShield is displayed while player is invincible after respawn
+	playerShield = new sf::CircleShape(50,50);
+	shieldColor = new sf::Color(255, 255, 0, 255);
+	playerShield->setOutlineThickness(10);
+	playerShield->setOutlineColor(*shieldColor);
+	playerShield->setFillColor(sf::Color::Transparent);
 }
 
 void Ship::update(double deltaTime) {
@@ -55,18 +62,32 @@ void Ship::update(double deltaTime) {
 
 	auto intersectingObjects = getGame()->getLevel()->getIntersectingChildren(this);
 
-	for (auto intersect : intersectingObjects) {
-		if (auto bullet = dynamic_cast<Bullet *>(intersect)) {
-			if (!bullet->getIFF()) {
-				dispose();
+	if (respawnClock.getElapsedTime().asSeconds() > 3)
+	{
+		for (auto intersect : intersectingObjects) {
+			if (auto bullet = dynamic_cast<Bullet *>(intersect)) {
+				if (!bullet->getIFF()) {
+					getGame()->getLevel()->getScoreboard()->setLives(-1);
+					respawnClock.restart();
+				}
+			}
+			if (auto asteroid = dynamic_cast<Asteroid *>(intersect)) {
+				getGame()->getLevel()->getScoreboard()->setLives(-1);
+				respawnClock.restart();
+			}
+			if (auto ufo = dynamic_cast<UFO *>(intersect)) {
+				getGame()->getLevel()->getScoreboard()->setLives(-1);
+				respawnClock.restart();
 			}
 		}
-		if (auto asteroid = dynamic_cast<Asteroid *>(intersect)) {
-			dispose();
-		}
-		if (auto ufo = dynamic_cast<UFO *>(intersect)) {
-			dispose();
-		}
+	}
+
+	//draw the shield while player is invincible NOTE: maxLives is set in scoreboard.h
+	if (respawnClock.getElapsedTime().asSeconds() < 3 && getGame()->getLevel()->getScoreboard()->getLives()
+		< getGame()->getLevel()->getScoreboard()->getMaxLives())
+	{
+		playerShield->setPosition(shipSprite.getPosition().x - 50, shipSprite.getPosition().y - 50);
+		draw(*playerShield);
 	}
 
 	draw(shipSprite);
@@ -105,10 +126,39 @@ void Ship::fire() {
 }
 
 bool Ship::isOutOfBounds() {
-	// TODO
+	const sf::Vector2f currentPos = this->shipSprite.getPosition();//get current position of object being checked
+	const sf::Vector2u windowBounds = this->getGame()->getWindow()->getSize();//get window size
+	const int offset = 10;
+
+	if (currentPos.x < 0 - offset)//check if outside left border
+	{
+		this->shipSprite.setPosition(windowBounds.x, currentPos.y);
+	}
+	else if (currentPos.x > windowBounds.x + offset)// check if outside right border
+	{
+		this->shipSprite.setPosition(0, currentPos.y);
+	}
+	else if (currentPos.y < 0 - offset)//check if outside top border
+	{
+		this->shipSprite.setPosition(currentPos.x, windowBounds.y);
+	}
+	else if (currentPos.y > windowBounds.y + offset)//check if outside bottom border
+	{
+		this->shipSprite.setPosition(currentPos.x, 0);
+	}
 	return false;
 }
 
 sf::FloatRect Ship::getBounds() {
 	return shipSprite.getGlobalBounds();
+}
+
+sf::Clock Ship::getRespawnClock()
+{
+	return respawnClock;
+}
+
+sf::Sprite Ship::getShipSprite()
+{
+	return shipSprite;
 }

@@ -13,6 +13,12 @@ class Scoreboard : public GameObject {
 	/// </summary>
 	int score = 0;
 
+	//player lives remaining
+	int lives;
+
+	//default number of starting lives
+	const int maxLives = 3;
+
 	/// <summary>
 	/// Font for drawing.
 	/// </summary>
@@ -33,6 +39,8 @@ public:
 	~Scoreboard();
 	virtual bool isOutOfBounds();
 
+	const int getMaxLives() const;
+
 	/// <summary>
 	/// Create Font and Text objects.
 	/// </summary>
@@ -50,6 +58,11 @@ public:
 	/// <returns>Current score</returns>
 	int getScore();
 
+	//get current player lives
+	int getLives();
+
+	//change number of player lives, use negative value to take away lives, positive value to add lives
+	void setLives(int x);
 
 	/// <summary>
 	/// Add given number to the current score.

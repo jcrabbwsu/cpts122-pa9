@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include "GameObject.h"
 #include "Scoreboard.h"
 #include "Ship.h"
@@ -37,7 +38,13 @@ public:
 	/// <param name="deltaTime">Time between frames</param>
 	void update(double deltaTime);
 
+	Scoreboard* getScoreboard();
+
 	bool isOutOfBounds();
+
+	//check if player is out of lives
+	bool gameOver();
+
 	void spawnNewHostile(int value = 0);
 	void updateSpawnCount();
 	void updateSpawnFreq();

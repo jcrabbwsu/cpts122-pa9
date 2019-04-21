@@ -4,6 +4,7 @@
 #include <sstream>
 
 Scoreboard::Scoreboard() {
+	lives = maxLives;
 }
 
 Scoreboard::~Scoreboard() {
@@ -11,6 +12,11 @@ Scoreboard::~Scoreboard() {
 
 bool Scoreboard::isOutOfBounds() {
 	return false;
+}
+
+const int Scoreboard::getMaxLives() const
+{
+	return maxLives;
 }
 
 void Scoreboard::init() {
@@ -27,7 +33,7 @@ void Scoreboard::init() {
 void Scoreboard::update(double deltaTime) {
 	std::ostringstream scoreString;
 	scoreString << "Score: " << score << std::endl;
-	scoreString << "Lives: " << 3;
+	scoreString << "Lives: " << lives;
 
 	scoreText.setString(scoreString.str());
 
@@ -41,6 +47,16 @@ void Scoreboard::update(double deltaTime) {
 
 int Scoreboard::getScore() {
 	return score;
+}
+
+int Scoreboard::getLives()
+{
+	return lives;
+}
+
+void Scoreboard::setLives(int x)
+{
+	lives = lives + x;
 }
 
 void Scoreboard::addToScore(int score) {

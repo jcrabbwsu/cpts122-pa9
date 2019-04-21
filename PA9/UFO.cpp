@@ -42,6 +42,7 @@ void UFO::update(double deltaTime) {
 	for (auto intersect : intersectingObjects) {
 		if (auto bullet = dynamic_cast<Bullet *>(intersect)) {
 			if (bullet->getIFF()) {
+				getGame()->getLevel()->getScoreboard()->addToScore(10);
 				dispose();
 			}
 		}

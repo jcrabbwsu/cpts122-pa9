@@ -14,6 +14,9 @@ class Ship : public GameObject
 	sf::Sprite shipSprite;
 	sf::Texture shipTexture;
 	sf::Clock shootClock;
+	sf::Clock respawnClock;
+	sf::CircleShape* playerShield;
+	sf::Color* shieldColor;
 
 public:
 	Ship();
@@ -28,6 +31,8 @@ public:
 	void update(double deltaTime);
 	bool isOutOfBounds();
 	sf::FloatRect getBounds();
+	sf::Clock getRespawnClock();
+	sf::Sprite getShipSprite();
 
 	/*=====================
 	Notes:

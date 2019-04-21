@@ -42,10 +42,35 @@ void Level::update(double deltaTime) {
 			child->dispose();
 		}
 	}
+
+	if (gameOver())
+	{
+		getGame()->getWindow()->close();//-------------!!!! WE DEFINITELY WANT TO CHANGE THIS TO RETURN TO THE MAIN MENU
+										//-------------!!!! AND POSSIBLY GIVE SOME SORT OF MSG ABOUT YOUR SCORE AND OTHER
+										//-------------!!!! TOP SCORES ON LOGAN'S LEADERBOARD SERVER
+	}
+
+}
+
+Scoreboard * Level::getScoreboard()
+{
+	return scoreboard;
 }
 
 bool Level::isOutOfBounds() {
 	return false;
+}
+
+bool Level::gameOver()
+{
+	if (getScoreboard()->getLives() == 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void Level::spawnNewHostile(int value) {
