@@ -7,10 +7,12 @@
 
 class Menu : public GameObject
 {
-public:
+	sf::Texture titleTexture;
+	sf::Sprite titleSprite;
 	sf::Font font;
-	sf::Text menuText;
+	sf::Text rulesText;
 
+public:
 	Menu();
 	void printMenu();
 

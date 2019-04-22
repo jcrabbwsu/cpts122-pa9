@@ -13,8 +13,7 @@ void Menu::printMenu()
 }
 
 //extracts font from file and stores in class
-void Menu::init()
-{
+void Menu::init() {
 	addChildGameObject(new Background());
 
 	if (!font.loadFromFile("kongtext.ttf")) {
@@ -22,28 +21,40 @@ void Menu::init()
 		abort();
 	};
 
-	this->menuText = sf::Text();
-	this->menuText.setString("Welcome to Asteroids!");
-	this->menuText.setFont(font);
-	this->menuText.setFillColor(sf::Color::White);
-	this->menuText.setOrigin(
-		this->menuText.getGlobalBounds().width / 2,
-		this->menuText.getGlobalBounds().height / 2
+	this->titleTexture.loadFromFile("asteroidstitle.png");
+	this->titleSprite.setTexture(titleTexture);
+	this->titleSprite.setScale(0.8, 0.8);
+	this->titleSprite.setOrigin(
+		this->titleSprite.getGlobalBounds().width / 2,
+		this->titleSprite.getGlobalBounds().height / 2
+	);
+
+	rulesText.setString("WASD to move\nSpacebar to shoot");
+	rulesText.setFont(font);
+	rulesText.setFillColor(sf::Color::White);
+	this->rulesText.setOrigin(
+		this->rulesText.getGlobalBounds().width / 2,
+		this->rulesText.getGlobalBounds().height / 2
 	);
 }
 
 void Menu::update(double deltaTime)
 {
-	this->menuText.setPosition(
+	this->titleSprite.setPosition(
+		getGame()->getWindow()->getSize().x / 2 - 80,
+		300.0
+	);
+	this->rulesText.setPosition(
 		getGame()->getWindow()->getSize().x / 2,
-		200.0
+		600.0
 	);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 		getGame()->transitionToGame();
 	}
 
-	draw(menuText);
+	draw(titleSprite);
+	draw(rulesText);
 }
 
 sf::FloatRect Menu::getBounds()

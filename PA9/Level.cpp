@@ -34,7 +34,7 @@ void Level::update(double deltaTime) {
 	spawnTimer++;
 
 	//increase spawn rate of enemies over time
-	if (spawnTimer % 50 == 0 && spawnFreqAsteroid > 1) {
+	if (spawnTimer % 200 == 0 && spawnFreqAsteroid > 1) {
 		updateSpawnFreq();
 	}
 
