@@ -1,21 +1,33 @@
 #include "Game.h"
 #include "Level.h"
+#include "Menu.h"
 
 #include <iostream>
 
 Game::Game()
-	: window(new sf::RenderWindow(sf::VideoMode(1200, 800), "Game"))
-	, level(new Level(1, 1, 100)) {
+	: window(new sf::RenderWindow(sf::VideoMode(1200, 800), "Asteroids"))
+	, menu(new Menu())
+	, level(nullptr) {
+	initLevel();
+
 	window->setFramerateLimit(60);
 	window->setVerticalSyncEnabled(true);
 
-	level->setGame(this);
-	level->initInternal();
+	menu->setGame(this);
+	menu->initInternal();
 }
 
 Game::~Game() {
+	delete menu;
 	delete level;
 	delete window;
+}
+
+void Game::initLevel() {
+	level = new Level(1, 1, 100);
+
+	level->setGame(this);
+	level->initInternal();
 }
 
 void Game::run() {
@@ -49,7 +61,11 @@ void Game::input() {
 
 void Game::render(sf::Time deltaTime) {
 	window->clear(sf::Color::Black);
-	level->updateInternal(deltaTime.asSeconds());
+	if (isAtMenu) {
+		menu->updateInternal(deltaTime.asSeconds());
+	} else {
+		level->updateInternal(deltaTime.asSeconds());
+	}
 	window->display();
 }
 
@@ -59,4 +75,13 @@ sf::RenderWindow *Game::getWindow() {
 
 Level *Game::getLevel() {
 	return level;
+}
+
+void Game::transitionToGame() {
+	initLevel();
+	isAtMenu = false;
+}
+
+void Game::transitionToMenu() {
+	isAtMenu = true;
 }

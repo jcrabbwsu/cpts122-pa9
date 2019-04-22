@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
+class Menu;
 class Level;
 
 /// <summary>
@@ -11,8 +12,12 @@ class Level;
 /// the sf::RenderWindow (including opening it, closing it, and events).
 /// </summary>
 class Game {
+	bool isAtMenu = true;
 	sf::RenderWindow *window;
+	Menu *menu;
 	Level *level;
+
+	void initLevel();
 
 public:
 	Game();
@@ -48,4 +53,7 @@ public:
 	/// </summary>
 	/// <returns>Level pointer</returns>
 	Level *getLevel();
+
+	void transitionToGame();
+	void transitionToMenu();
 };

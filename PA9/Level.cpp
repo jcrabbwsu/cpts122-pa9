@@ -4,6 +4,7 @@
 #include "UFO.h"
 #include "Bullet.h"
 #include "Ship.h"
+#include "Background.h"
 
 Level::Level(int newTimer, int newCount, int newFreq)
 		: scoreboard(new Scoreboard())
@@ -15,6 +16,7 @@ Level::Level(int newTimer, int newCount, int newFreq)
 }
 
 void Level::init() {
+	addChildGameObject(new Background());
 	addChildGameObject(scoreboard);
 	addChildGameObject(playerShip);
 }
@@ -45,11 +47,8 @@ void Level::update(double deltaTime) {
 
 	if (gameOver())
 	{
-		getGame()->getWindow()->close();//-------------!!!! WE DEFINITELY WANT TO CHANGE THIS TO RETURN TO THE MAIN MENU
-										//-------------!!!! AND POSSIBLY GIVE SOME SORT OF MSG ABOUT YOUR SCORE AND OTHER
-										//-------------!!!! TOP SCORES ON LOGAN'S LEADERBOARD SERVER
+		getGame()->transitionToMenu();
 	}
-
 }
 
 Scoreboard * Level::getScoreboard()
