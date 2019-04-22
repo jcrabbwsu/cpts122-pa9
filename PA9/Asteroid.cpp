@@ -18,7 +18,7 @@ void Asteroid::init() {
 	setMoveVector();//set a random vector that travels at some angle into the room
 	spinDirection = rand() % 2;
 	spinScale = rand() % 4;
-	asteroidTexture.loadFromFile("alien.png");
+	asteroidTexture.loadFromFile("asteroid.png");
 	asteroidSprite.setTexture(asteroidTexture);
 	asteroidSprite.setScale(0.1, 0.1);
 	asteroidSprite.setOrigin(
