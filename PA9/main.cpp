@@ -1,5 +1,7 @@
 #include "Game.h"
 
+#include "Menu.h"
+
 /// <summary>
 /// Entry point of the application
 ///  - Initializes the random seed.
