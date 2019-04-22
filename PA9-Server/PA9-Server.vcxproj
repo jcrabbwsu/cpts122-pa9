@@ -124,6 +124,9 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="Server.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="scores.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

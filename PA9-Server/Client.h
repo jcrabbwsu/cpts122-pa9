@@ -3,6 +3,7 @@
 #include "Server.h"
 
 #include <SFML/Network.hpp>
+#include <nlohmann/json.hpp>
 
 class Client {
 	Server &server;
@@ -16,4 +17,5 @@ public:
 
 	void receiveLoop();
 	bool isConnected();
+	void sendMessage(nlohmann::json json);
 };
