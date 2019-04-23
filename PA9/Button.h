@@ -10,8 +10,6 @@ public:
 	Button();
 	~Button();
 
-	sf::RectangleShape button;
-
 	void init();
 	void update(double deltaTime);
 

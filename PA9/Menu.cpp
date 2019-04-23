@@ -136,6 +136,21 @@ void Menu::update(double deltaTime)
 		getGame()->transitionToGame();
 	}
 
+	//if exit button is clicked
+	if (cursor.getPosition().x < exitButton.getGlobalBounds().left && cursor.getPosition().y > exitButton.getGlobalBounds().top) //needs to be more precise
+	{
+		exitButton.setFillColor(sf::Color(169, 169, 169));
+
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+		{
+			getGame()->getWindow()->close();
+		}
+	}
+	else
+	{
+		exitButton.setFillColor(sf::Color::Transparent);
+	}
+
 	draw(titleSprite);
 	draw(rulesText);
 	draw(newGameButton);

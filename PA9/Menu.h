@@ -17,6 +17,7 @@ class Menu : public GameObject
 	sf::Text newGameButtonText;
 	sf::Text ScoreboardButtonText;
 	sf::Text exitButtonText;
+	sf::Mouse cursor;
 
 public:
 	Menu();
