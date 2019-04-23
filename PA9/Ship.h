@@ -33,12 +33,4 @@ public:
 	sf::FloatRect getBounds();
 	sf::Clock getRespawnClock();
 	sf::Sprite getShipSprite();
-
-	/*=====================
-	Notes:
-	* Does control input need to be in here? If so should they be in update or the functions themselves?
-	* Need information on setOutOfBounds
-	* Where do we initialize the ship and other objects?
-	* DeltaTime * moving X and Y?
-	=====================*/
 };
