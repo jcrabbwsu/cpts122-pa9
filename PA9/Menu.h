@@ -5,23 +5,22 @@
 #include "GameObject.h"
 #include "Button.h"
 
-class Menu : public GameObject
-{
+class Menu : public GameObject {
 	sf::Texture titleTexture;
 	sf::Sprite titleSprite;
 	sf::Font font;
 	sf::Text rulesText;
 	Button newGameButton;
-	Button ScoreboardButton;
+	Button scoreboardButton;
 	Button exitButton;
 	sf::Text newGameButtonText;
-	sf::Text ScoreboardButtonText;
+	sf::Text scoreboardButtonText;
 	sf::Text exitButtonText;
 	sf::Mouse cursor;
 
 public:
 	Menu();
-	void printMenu();
+	~Menu();
 
 	void init();
 	void update(double deltaTime);

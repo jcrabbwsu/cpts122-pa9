@@ -3,13 +3,10 @@
 #include "Background.h"
 
 //constructor for menu class
-Menu::Menu()
-{
+Menu::Menu() {
 }
 
-//prints game menu using specific font
-void Menu::printMenu()
-{
+Menu::~Menu() {
 }
 
 //extracts font from file and stores in class
@@ -22,21 +19,21 @@ void Menu::init() {
 	};
 
 	//initialize asteriod title sprite
-	this->titleTexture.loadFromFile("asteroidstitle.png");
-	this->titleSprite.setTexture(titleTexture);
-	this->titleSprite.setScale(0.8, 0.8);
-	this->titleSprite.setOrigin(
-		this->titleSprite.getGlobalBounds().width / 2,
-		this->titleSprite.getGlobalBounds().height / 2
+	titleTexture.loadFromFile("asteroidstitle.png");
+	titleSprite.setTexture(titleTexture);
+	titleSprite.setScale(0.8, 0.8);
+	titleSprite.setOrigin(
+		titleSprite.getGlobalBounds().width / 2,
+		titleSprite.getGlobalBounds().height / 2
 	);
 
 	//initialize rules text
 	rulesText.setString("WASD to move\nSpacebar to shoot");
 	rulesText.setFont(font);
 	rulesText.setFillColor(sf::Color::White);
-	this->rulesText.setOrigin(
-		this->rulesText.getGlobalBounds().width / 2,
-		this->rulesText.getGlobalBounds().height / 2
+	rulesText.setOrigin(
+		rulesText.getGlobalBounds().width / 2,
+		rulesText.getGlobalBounds().height / 2
 	);
 
 	//initialize menu buttons
@@ -44,90 +41,93 @@ void Menu::init() {
 	newGameButton.setFillColor(sf::Color::Transparent);
 	newGameButton.setOutlineThickness(5);
 	newGameButton.setOutlineColor(sf::Color::White);
-	this->newGameButton.setOrigin(
-		this->newGameButton.getGlobalBounds().width / 2,
-		this->newGameButton.getGlobalBounds().height / 2
+	newGameButton.setOrigin(
+		newGameButton.getGlobalBounds().width / 2,
+		newGameButton.getGlobalBounds().height / 2
 	);
 
-	ScoreboardButton.setSize(sf::Vector2f(330, 40));
-	ScoreboardButton.setFillColor(sf::Color::Transparent);
-	ScoreboardButton.setOutlineThickness(5);
-	ScoreboardButton.setOutlineColor(sf::Color::White);
-	this->ScoreboardButton.setOrigin(
-		this->ScoreboardButton.getGlobalBounds().width / 2,
-		this->ScoreboardButton.getGlobalBounds().height / 2
+	scoreboardButton.setSize(sf::Vector2f(330, 40));
+	scoreboardButton.setFillColor(sf::Color::Transparent);
+	scoreboardButton.setOutlineThickness(5);
+	scoreboardButton.setOutlineColor(sf::Color::White);
+	scoreboardButton.setOrigin(
+		scoreboardButton.getGlobalBounds().width / 2,
+		scoreboardButton.getGlobalBounds().height / 2
 	);
 
 	exitButton.setSize(sf::Vector2f(200, 40));
 	exitButton.setFillColor(sf::Color::Transparent);
 	exitButton.setOutlineThickness(5);
 	exitButton.setOutlineColor(sf::Color::White);
-	this->exitButton.setOrigin(
-		this->exitButton.getGlobalBounds().width / 2,
-		this->exitButton.getGlobalBounds().height / 2
+	exitButton.setOrigin(
+		exitButton.getGlobalBounds().width / 2,
+		exitButton.getGlobalBounds().height / 2
 	);
 
 	//initialize menu button text
 	newGameButtonText.setString("New Game");
 	newGameButtonText.setFont(font);
 	newGameButtonText.setFillColor(sf::Color::White);
-	this->newGameButtonText.setOrigin(
-		this->newGameButtonText.getGlobalBounds().width / 2,
-		this->newGameButtonText.getGlobalBounds().height / 2
+	newGameButtonText.setOrigin(
+		newGameButtonText.getGlobalBounds().width / 2,
+		newGameButtonText.getGlobalBounds().height / 2
 	);
 
-	ScoreboardButtonText.setString("Scoreboard");
-	ScoreboardButtonText.setFont(font);
-	ScoreboardButtonText.setFillColor(sf::Color::White);
-	this->ScoreboardButtonText.setOrigin(
-		this->ScoreboardButtonText.getGlobalBounds().width / 2,
-		this->ScoreboardButtonText.getGlobalBounds().height / 2
+	scoreboardButtonText.setString("Scoreboard");
+	scoreboardButtonText.setFont(font);
+	scoreboardButtonText.setFillColor(sf::Color::White);
+	scoreboardButtonText.setOrigin(
+		scoreboardButtonText.getGlobalBounds().width / 2,
+		scoreboardButtonText.getGlobalBounds().height / 2
 	);
 
 	exitButtonText.setString("Exit");
 	exitButtonText.setFont(font);
 	exitButtonText.setFillColor(sf::Color::White);
-	this->exitButtonText.setOrigin(
-		this->exitButtonText.getGlobalBounds().width / 2,
-		this->exitButtonText.getGlobalBounds().height / 2
+	exitButtonText.setOrigin(
+		exitButtonText.getGlobalBounds().width / 2,
+		exitButtonText.getGlobalBounds().height / 2
 	);
 }
 
 void Menu::update(double deltaTime)
 {
 	//display menu sprite
-	this->titleSprite.setPosition(
+	titleSprite.setPosition(
 		getGame()->getWindow()->getSize().x / 2 - 80,
 		250.0
 	);
+
 	//display rules text
-	this->rulesText.setPosition(
+	rulesText.setPosition(
 		getGame()->getWindow()->getSize().x / 2,
 		550.0
 	);
+
 	//display menu buttons
-	this->newGameButton.setPosition(
+	newGameButton.setPosition(
 		getGame()->getWindow()->getSize().x - getGame()->getWindow()->getSize().x + 160,
 		650.0
 	);
-	this->ScoreboardButton.setPosition(
+	scoreboardButton.setPosition(
 		getGame()->getWindow()->getSize().x / 2 + 10,
 		650.0
 	);
-	this->exitButton.setPosition(
+	exitButton.setPosition(
 		getGame()->getWindow()->getSize().x - 130,
 		650.0
 	);
+
 	//display button text
-	this->newGameButtonText.setPosition(
+	newGameButtonText.setPosition(
 		getGame()->getWindow()->getSize().x - getGame()->getWindow()->getSize().x + 150,
 		640.0
 	);
-	this->ScoreboardButtonText.setPosition(
+	scoreboardButtonText.setPosition(
 		getGame()->getWindow()->getSize().x / 2,
 		640.0
 	);
-	this->exitButtonText.setPosition(
+	exitButtonText.setPosition(
 		getGame()->getWindow()->getSize().x - 140,
 		640.0
 	);
@@ -154,10 +154,10 @@ void Menu::update(double deltaTime)
 	draw(titleSprite);
 	draw(rulesText);
 	draw(newGameButton);
-	draw(ScoreboardButton);
+	draw(scoreboardButton);
 	draw(exitButton);
 	draw(newGameButtonText);
-	draw(ScoreboardButtonText);
+	draw(scoreboardButtonText);
 	draw(exitButtonText);
 }
 
