@@ -20,7 +20,7 @@ void ScoreViewScreen::init() {
 		abort();
 	};
 
-	titleText.setString("Top 10 High Scores");
+	titleText.setString("Top 20 High Scores");
 	titleText.setFont(font);
 	titleText.setFillColor(sf::Color::White);
 	titleText.setOrigin(
@@ -101,7 +101,7 @@ void ScoreViewScreen::setScores(std::vector<score_t> scores) {
 	
 	unsigned int rank = 1;
 	int j = 0;
-	while (j < scores.size() && rank < 11) {
+	while (j < scores.size() && rank < 21) {
 		oss << "#" << rank << ": " << scores.at(j).initials << "  " << scores.at(j).score << std::endl;
 		rank++;
 		j++;

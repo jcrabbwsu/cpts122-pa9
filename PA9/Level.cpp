@@ -12,7 +12,7 @@ Level::Level(int newTimer, int newCount, int newFreq)
 	spawnTimer = newTimer;
 	spawnCount = newCount;
 	spawnFreqAsteroid = newFreq;
-	spawnFreqUFO = 500;
+	spawnFreqUFO = 200;
 }
 
 void Level::init() {
@@ -59,7 +59,7 @@ bool Level::isOutOfBounds() {
 }
 
 bool Level::gameOver() {
-	return getScoreboard()->getLives() == 0;
+	return getScoreboard()->getLives() < 0;
 }
 
 void Level::spawnNewHostile(int value) {

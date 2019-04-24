@@ -162,6 +162,7 @@
     <ClCompile Include="ScoreSubmitter.cpp" />
     <ClCompile Include="ScoreViewScreen.cpp" />
     <ClCompile Include="Ship.cpp" />
+    <ClCompile Include="Test.cpp" />
     <ClCompile Include="UFO.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +180,7 @@
     <ClInclude Include="ScoreSubmitter.h" />
     <ClInclude Include="ScoreViewScreen.h" />
     <ClInclude Include="Ship.h" />
+    <ClInclude Include="Test.h" />
     <ClInclude Include="UFO.h" />
   </ItemGroup>
   <ItemGroup>
