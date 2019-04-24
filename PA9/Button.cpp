@@ -26,7 +26,7 @@ void Button::init() {
 
 void Button::update(double deltaTime) {
 	border.setPosition(x, y);
-	text.setPosition(x, y);
+	text.setPosition(x - 10, y);
 
 	//border.setSize(text.getLocalBounds().width, text.getLocalBounds().height);
 	sf::FloatRect size = text.getLocalBounds();

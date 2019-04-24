@@ -21,7 +21,7 @@ void Menu::init() {
 	//initialize asteriod title sprite
 	titleTexture.loadFromFile("asteroidstitle.png");
 	titleSprite.setTexture(titleTexture);
-	titleSprite.setScale(0.8, 0.8);
+	titleSprite.setScale(0.7, 0.7);
 	titleSprite.setOrigin(
 		titleSprite.getGlobalBounds().width / 2,
 		titleSprite.getGlobalBounds().height / 2
@@ -38,7 +38,7 @@ void Menu::init() {
 
 	sf::Vector2u windowSize = getGame()->getWindow()->getSize();
 	int x = windowSize.x;
-	int y = windowSize.y - (windowSize.y * 0.15);
+	int y = windowSize.y - (windowSize.y * 0.10);
 
 	playButton = (new Button(200, 40, x - (x * 0.75), y, "Play"));
 	scoresButton = (new Button(200, 40, x - (x * 0.50), y, "Highscores"));
@@ -65,17 +65,17 @@ void Menu::update(double deltaTime)
 {
 	titleSprite.setPosition(
 		getGame()->getWindow()->getSize().x / 2 - 80,
-		250.0
+		190.0
 	);
 
 	rulesText.setPosition(
 		getGame()->getWindow()->getSize().x / 2,
-		550.0
+		500.0
 	);
 
 	sf::Vector2u windowSize = getGame()->getWindow()->getSize();
 	int x = windowSize.x;
-	int y = windowSize.y - (windowSize.y * 0.15);
+	int y = windowSize.y - (windowSize.y * 0.10);
 
 	playButton->setPosition(x - (x * 0.75), y);
 	scoresButton->setPosition(x - (x * 0.50), y);
