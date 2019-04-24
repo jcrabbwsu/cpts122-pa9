@@ -9,7 +9,7 @@
 #include "ScoreViewScreen.h"
 
 ScoreSubmitter::ScoreSubmitter(Game *game) : game(game) {
-	socket.connect("localhost", 1612);
+	socket.connect("apartment.gorence.xyz", 1612);
 	socketThread = std::thread(&ScoreSubmitter::receiveLoop, this);
 }
 
