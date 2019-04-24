@@ -36,129 +36,53 @@ void Menu::init() {
 		rulesText.getGlobalBounds().height / 2
 	);
 
-	//initialize menu buttons
-	newGameButton.setSize(sf::Vector2f(250, 40));
-	newGameButton.setFillColor(sf::Color::Transparent);
-	newGameButton.setOutlineThickness(5);
-	newGameButton.setOutlineColor(sf::Color::White);
-	newGameButton.setOrigin(
-		newGameButton.getGlobalBounds().width / 2,
-		newGameButton.getGlobalBounds().height / 2
-	);
+	sf::Vector2u windowSize = getGame()->getWindow()->getSize();
+	int x = windowSize.x;
+	int y = windowSize.y - (windowSize.y * 0.15);
 
-	scoreboardButton.setSize(sf::Vector2f(330, 40));
-	scoreboardButton.setFillColor(sf::Color::Transparent);
-	scoreboardButton.setOutlineThickness(5);
-	scoreboardButton.setOutlineColor(sf::Color::White);
-	scoreboardButton.setOrigin(
-		scoreboardButton.getGlobalBounds().width / 2,
-		scoreboardButton.getGlobalBounds().height / 2
-	);
+	playButton = (new Button(200, 40, x - (x * 0.75), y, "Play"));
+	scoresButton = (new Button(200, 40, x - (x * 0.50), y, "Highscores"));
+	exitButton = (new Button(200, 40, x - (x * 0.25), y, "Exit"));
 
-	exitButton.setSize(sf::Vector2f(200, 40));
-	exitButton.setFillColor(sf::Color::Transparent);
-	exitButton.setOutlineThickness(5);
-	exitButton.setOutlineColor(sf::Color::White);
-	exitButton.setOrigin(
-		exitButton.getGlobalBounds().width / 2,
-		exitButton.getGlobalBounds().height / 2
-	);
+	playButton->setCallback([this]() {
+		this->getGame()->transitionToGame();
+	});
 
-	//initialize menu button text
-	newGameButtonText.setString("New Game");
-	newGameButtonText.setFont(font);
-	newGameButtonText.setFillColor(sf::Color::White);
-	newGameButtonText.setOrigin(
-		newGameButtonText.getGlobalBounds().width / 2,
-		newGameButtonText.getGlobalBounds().height / 2
-	);
+	scoresButton->setCallback([this]() {
+		this->getGame()->transitionToGame();
+	});
 
-	scoreboardButtonText.setString("Scoreboard");
-	scoreboardButtonText.setFont(font);
-	scoreboardButtonText.setFillColor(sf::Color::White);
-	scoreboardButtonText.setOrigin(
-		scoreboardButtonText.getGlobalBounds().width / 2,
-		scoreboardButtonText.getGlobalBounds().height / 2
-	);
+	exitButton->setCallback([this]() {
+		this->getGame()->getWindow()->close();
+	});
 
-	exitButtonText.setString("Exit");
-	exitButtonText.setFont(font);
-	exitButtonText.setFillColor(sf::Color::White);
-	exitButtonText.setOrigin(
-		exitButtonText.getGlobalBounds().width / 2,
-		exitButtonText.getGlobalBounds().height / 2
-	);
+	addChildGameObject(playButton);
+	addChildGameObject(scoresButton);
+	addChildGameObject(exitButton);
 }
 
 void Menu::update(double deltaTime)
 {
-	//display menu sprite
 	titleSprite.setPosition(
 		getGame()->getWindow()->getSize().x / 2 - 80,
 		250.0
 	);
 
-	//display rules text
 	rulesText.setPosition(
 		getGame()->getWindow()->getSize().x / 2,
 		550.0
 	);
 
-	//display menu buttons
-	newGameButton.setPosition(
-		getGame()->getWindow()->getSize().x - getGame()->getWindow()->getSize().x + 160,
-		650.0
-	);
-	scoreboardButton.setPosition(
-		getGame()->getWindow()->getSize().x / 2 + 10,
-		650.0
-	);
-	exitButton.setPosition(
-		getGame()->getWindow()->getSize().x - 130,
-		650.0
-	);
+	sf::Vector2u windowSize = getGame()->getWindow()->getSize();
+	int x = windowSize.x;
+	int y = windowSize.y - (windowSize.y * 0.15);
 
-	//display button text
-	newGameButtonText.setPosition(
-		getGame()->getWindow()->getSize().x - getGame()->getWindow()->getSize().x + 150,
-		640.0
-	);
-	scoreboardButtonText.setPosition(
-		getGame()->getWindow()->getSize().x / 2,
-		640.0
-	);
-	exitButtonText.setPosition(
-		getGame()->getWindow()->getSize().x - 140,
-		640.0
-	);
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-		getGame()->transitionToGame();
-	}
-
-	//if exit button is clicked
-	if (cursor.getPosition().x < exitButton.getGlobalBounds().left && cursor.getPosition().y > exitButton.getGlobalBounds().top) //needs to be more precise
-	{
-		exitButton.setFillColor(sf::Color(169, 169, 169));
-
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-		{
-			getGame()->getWindow()->close();
-		}
-	}
-	else
-	{
-		exitButton.setFillColor(sf::Color::Transparent);
-	}
+	playButton->setPosition(x - (x * 0.75), y);
+	scoresButton->setPosition(x - (x * 0.50), y);
+	exitButton->setPosition(x - (x * 0.25), y);
 
 	draw(titleSprite);
 	draw(rulesText);
-	draw(newGameButton);
-	draw(scoreboardButton);
-	draw(exitButton);
-	draw(newGameButtonText);
-	draw(scoreboardButtonText);
-	draw(exitButtonText);
 }
 
 sf::FloatRect Menu::getBounds()

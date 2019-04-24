@@ -10,13 +10,9 @@ class Menu : public GameObject {
 	sf::Sprite titleSprite;
 	sf::Font font;
 	sf::Text rulesText;
-	Button newGameButton;
-	Button scoreboardButton;
-	Button exitButton;
-	sf::Text newGameButtonText;
-	sf::Text scoreboardButtonText;
-	sf::Text exitButtonText;
-	sf::Mouse cursor;
+	Button *playButton;
+	Button *scoresButton;
+	Button *exitButton;
 
 public:
 	Menu();
