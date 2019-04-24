@@ -136,21 +136,53 @@ void Menu::update(double deltaTime)
 		getGame()->transitionToGame();
 	}
 
+	//if new game button is clicked
+	sf::Vector2f cursorPos(sf::Mouse::getPosition(*getGame()->getWindow()).x, sf::Mouse::getPosition(*getGame()->getWindow()).y);
+	if (newGameButton.getGlobalBounds().contains(cursorPos))
+	{
+		newGameButton.setFillColor(sf::Color(169, 169, 169));
+
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+		{
+			getGame()->transitionToGame();
+		}
+	}
+	else
+	{
+		newGameButton.setFillColor(sf::Color::Transparent);
+	}
+
+	//if scoreboard button is clicked
+	if (scoreboardButton.getGlobalBounds().contains(cursorPos))
+	{
+		scoreboardButton.setFillColor(sf::Color(169, 169, 169));
+
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+		{
+			//display scoreboard
+		}
+	}
+	else
+	{
+		scoreboardButton.setFillColor(sf::Color::Transparent);
+	}
+
 	//if exit button is clicked
-	if (cursor.getPosition().x < exitButton.getGlobalBounds().left && cursor.getPosition().y > exitButton.getGlobalBounds().top) //needs to be more precise
+	if (exitButton.getGlobalBounds().contains(cursorPos))
+
 	{
 		exitButton.setFillColor(sf::Color(169, 169, 169));
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		{
-			getGame()->getWindow()->close();
+			getGame()->getWindow()->close(); //close the window
 		}
 	}
 	else
 	{
 		exitButton.setFillColor(sf::Color::Transparent);
 	}
-
+	
 	draw(titleSprite);
 	draw(rulesText);
 	draw(newGameButton);
