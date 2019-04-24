@@ -49,7 +49,7 @@ void Menu::init() {
 	});
 
 	scoresButton->setCallback([this]() {
-		this->getGame()->transitionToGame();
+		this->getGame()->transitiontoScoreView();
 	});
 
 	exitButton->setCallback([this]() {

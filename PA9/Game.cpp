@@ -1,14 +1,22 @@
 #include "Game.h"
 #include "Level.h"
 #include "Menu.h"
+#include "ScoreSubmitter.h"
+#include "ScoreSubmissionScreen.h"
+#include "ScoreViewScreen.h"
 
 #include <iostream>
 
 Game::Game()
 	: window(new sf::RenderWindow(sf::VideoMode(1200, 800), "Asteroids"))
 	, menu(new Menu())
-	, level(nullptr) {
+	, level(nullptr)
+	, scoreSubmitter(new ScoreSubmitter(this))
+	, submissionScreen(nullptr)
+	, scoreScreen(nullptr) {
 	initLevel();
+	initSubmissionScreen();
+	initScoreViewScreen();
 
 	window->setFramerateLimit(60);
 	window->setVerticalSyncEnabled(true);
@@ -28,6 +36,21 @@ void Game::initLevel() {
 
 	level->setGame(this);
 	level->initInternal();
+}
+
+void Game::initSubmissionScreen() {
+	submissionScreen = new ScoreSubmissionScreen();
+	submissionScreen->setScore(0);
+
+	submissionScreen->setGame(this);
+	submissionScreen->initInternal();
+}
+
+void Game::initScoreViewScreen() {
+	scoreScreen = new ScoreViewScreen();
+
+	scoreScreen->setGame(this);
+	scoreScreen->initInternal();
 }
 
 void Game::run() {
@@ -56,15 +79,29 @@ void Game::input() {
 			sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
 			window->setView(sf::View(visibleArea));
 		}
+		if (event.type == sf::Event::TextEntered) {
+			if (event.text.unicode >= 32 && event.text.unicode <= 128) {
+				submissionScreen->addChar(static_cast<char>(event.text.unicode));
+			}
+		}
 	}
 }
 
 void Game::render(sf::Time deltaTime) {
 	window->clear(sf::Color::Black);
-	if (isAtMenu) {
-		menu->updateInternal(deltaTime.asSeconds());
-	} else {
+	switch (state) {
+	case GAME:
 		level->updateInternal(deltaTime.asSeconds());
+		break;
+	case MENU:
+		menu->updateInternal(deltaTime.asSeconds());
+		break;
+	case SCORE_SUBMIT:
+		submissionScreen->updateInternal(deltaTime.asSeconds());
+		break;
+	case SCORE_VIEW:
+		scoreScreen->updateInternal(deltaTime.asSeconds());
+		break;
 	}
 	window->display();
 }
@@ -77,11 +114,29 @@ Level *Game::getLevel() {
 	return level;
 }
 
+ScoreSubmitter *Game::getScoreSubmitter() {
+	return scoreSubmitter;
+}
+
+ScoreViewScreen *Game::getScoreViewScreen() {
+	return scoreScreen;
+}
+
 void Game::transitionToGame() {
 	initLevel();
-	isAtMenu = false;
+	state = GAME;
 }
 
 void Game::transitionToMenu() {
-	isAtMenu = true;
+	state = MENU;
+}
+
+void Game::transitionToScoreSubmit(int score) {
+	state = SCORE_SUBMIT;
+	submissionScreen->setScore(score);
+}
+
+void Game::transitiontoScoreView() {
+	initScoreViewScreen();
+	state = SCORE_VIEW;
 }

@@ -6,18 +6,34 @@
 
 class Menu;
 class Level;
+class ScoreSubmissionScreen;
+class ScoreSubmitter;
+class ScoreViewScreen;
+
+typedef enum {
+	MENU,
+	GAME,
+	SCORE_SUBMIT,
+	SCORE_VIEW
+} state_t;
 
 /// <summary>
 /// Game is the 'root' object which manages the Level,
 /// the sf::RenderWindow (including opening it, closing it, and events).
 /// </summary>
 class Game {
-	bool isAtMenu = true;
 	sf::RenderWindow *window;
+	Game *game;
 	Menu *menu;
 	Level *level;
+	ScoreSubmissionScreen *submissionScreen;
+	ScoreViewScreen *scoreScreen;
+	ScoreSubmitter *scoreSubmitter;
+	state_t state = MENU;
 
 	void initLevel();
+	void initSubmissionScreen();
+	void initScoreViewScreen();
 
 public:
 	Game();
@@ -54,6 +70,11 @@ public:
 	/// <returns>Level pointer</returns>
 	Level *getLevel();
 
+	ScoreSubmitter *getScoreSubmitter();
+	ScoreViewScreen *getScoreViewScreen();
+
 	void transitionToGame();
 	void transitionToMenu();
+	void transitionToScoreSubmit(int score);
+	void transitiontoScoreView();
 };

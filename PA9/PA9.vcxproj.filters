@@ -14,6 +14,9 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ScoreSubmitter.cpp" />
+    <ClCompile Include="ScoreSubmissionScreen.cpp" />
+    <ClCompile Include="ScoreViewScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -28,6 +31,9 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="ScoreSubmitter.h" />
+    <ClInclude Include="ScoreSubmissionScreen.h" />
+    <ClInclude Include="ScoreViewScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

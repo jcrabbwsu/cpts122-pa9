@@ -45,14 +45,12 @@ void Level::update(double deltaTime) {
 		}
 	}
 
-	if (gameOver())
-	{
-		getGame()->transitionToMenu();
+	if (gameOver()) {
+		getGame()->transitionToScoreSubmit(getGame()->getLevel()->getScoreboard()->getScore());
 	}
 }
 
-Scoreboard * Level::getScoreboard()
-{
+Scoreboard *Level::getScoreboard() {
 	return scoreboard;
 }
 
@@ -60,16 +58,8 @@ bool Level::isOutOfBounds() {
 	return false;
 }
 
-bool Level::gameOver()
-{
-	if (getScoreboard()->getLives() == 0)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+bool Level::gameOver() {
+	return getScoreboard()->getLives() == 0;
 }
 
 void Level::spawnNewHostile(int value) {
