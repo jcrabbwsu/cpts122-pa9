@@ -83,3 +83,8 @@ void ScoreSubmissionScreen::addChar(char c) {
 	initialsText.setString(initials);
 	charCount++;
 }
+
+void ScoreSubmissionScreen::setCharCount(int i)
+{
+	charCount = i;
+}

@@ -32,8 +32,7 @@ Game::~Game() {
 }
 
 void Game::initLevel() {
-	level = new Level(1, 1, 200);
-
+	level = new Level(1, 1, 100);
 	level->setGame(this);
 	level->initInternal();
 }

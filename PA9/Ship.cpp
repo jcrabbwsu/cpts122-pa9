@@ -25,7 +25,7 @@ void Ship::init() {
 	shipSprite.setPosition(location);
 
 	//playerShield is displayed while player is invincible after respawn
-	playerShield = new sf::CircleShape(50,50);
+	playerShield = new sf::CircleShape(75,75);
 	shieldColor = new sf::Color(255, 255, 0, 255);
 	playerShield->setOutlineThickness(10);
 	playerShield->setOutlineColor(*shieldColor);
@@ -86,7 +86,7 @@ void Ship::update(double deltaTime) {
 	if (respawnClock.getElapsedTime().asSeconds() < 3 && getGame()->getLevel()->getScoreboard()->getLives()
 		< getGame()->getLevel()->getScoreboard()->getMaxLives())
 	{
-		playerShield->setPosition(shipSprite.getPosition().x - 50, shipSprite.getPosition().y - 50);
+		playerShield->setPosition(shipSprite.getPosition().x - 75, shipSprite.getPosition().y - 75);
 		draw(*playerShield);
 	}
 

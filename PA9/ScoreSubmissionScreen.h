@@ -24,4 +24,5 @@ public:
 
 	void setScore(int score);
 	void addChar(char c);
+	void setCharCount(int i);
 };

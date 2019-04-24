@@ -20,7 +20,7 @@ void ScoreViewScreen::init() {
 		abort();
 	};
 
-	titleText.setString("High Scores");
+	titleText.setString("Top 10 High Scores");
 	titleText.setFont(font);
 	titleText.setFillColor(sf::Color::White);
 	titleText.setOrigin(
@@ -81,9 +81,30 @@ sf::FloatRect ScoreViewScreen::getBounds() {
 void ScoreViewScreen::setScores(std::vector<score_t> scores) {
 	this->scores = scores;
 	std::ostringstream oss;
+	score_t temp;
 
-	for (auto score : scores) {
-		oss << score.initials << "  " << score.score << std::endl;
+	//order the vector
+	for (int k = 0; k < (scores.size()); k++) {
+		for (int i = 1; i < (scores.size() - k); i++)
+		{
+			if (scores.at(k).score < scores.at(k + i).score)
+			{
+				temp.initials = scores.at(k).initials;
+				temp.score = scores.at(k).score;
+				scores.at(k).initials = scores.at(k + i).initials;
+				scores.at(k).score = scores.at(k + i).score;
+				scores.at(k + i).initials = temp.initials;
+				scores.at(k + i).score = temp.score;
+			}
+		}
+	}
+	
+	unsigned int rank = 1;
+	int j = 0;
+	while (j < scores.size() && rank < 11) {
+		oss << "#" << rank << ": " << scores.at(j).initials << "  " << scores.at(j).score << std::endl;
+		rank++;
+		j++;
 	}
 	scoresText.setString(oss.str().c_str());
 }
