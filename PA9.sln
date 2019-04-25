@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PA9", "PA9\PA9.vcxproj", "{88BFB8BF-9FBA-4DDC-8546-6D37EB81A345}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PA9-Client", "PA9\PA9.vcxproj", "{88BFB8BF-9FBA-4DDC-8546-6D37EB81A345}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PA9-Server", "PA9-Server\PA9-Server.vcxproj", "{5BE9DC18-0A6C-443C-972E-60F6E2660745}"
 EndProject

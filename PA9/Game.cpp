@@ -7,11 +7,11 @@
 
 #include <iostream>
 
-Game::Game()
+Game::Game(bool testing)
 	: window(new sf::RenderWindow(sf::VideoMode(1200, 800), "Asteroids"))
 	, menu(new Menu())
 	, level(nullptr)
-	, scoreSubmitter(new ScoreSubmitter(this))
+	, scoreSubmitter(new ScoreSubmitter(this, testing))
 	, submissionScreen(nullptr)
 	, scoreScreen(nullptr) {
 	initLevel();

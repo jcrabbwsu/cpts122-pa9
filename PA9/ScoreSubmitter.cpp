@@ -8,9 +8,11 @@
 #include "Game.h"
 #include "ScoreViewScreen.h"
 
-ScoreSubmitter::ScoreSubmitter(Game *game) : game(game) {
-	socket.connect("apartment.gorence.xyz", 1612);
-	socketThread = std::thread(&ScoreSubmitter::receiveLoop, this);
+ScoreSubmitter::ScoreSubmitter(Game *game, bool testing) : game(game) {
+	if (!testing) {
+		socket.connect("apartment.gorence.xyz", 1612);
+		socketThread = std::thread(&ScoreSubmitter::receiveLoop, this);
+	}
 }
 
 ScoreSubmitter::~ScoreSubmitter() {

@@ -1,5 +1,8 @@
 #pragma once
 
+// Hey Andy, if you want to enable testing, uncomment this macro.
+//#define TESTING
+
 #include "Game.h"
 
 #include "Menu.h"
@@ -14,17 +17,22 @@
 int main(void) {
 	srand((unsigned int)time(NULL));
 
-	//auto game = new Game();
-	//game->run();
+#ifdef TESTING
+	Test *test = new Test();
 
-	//delete game;
+	test->test1();
+	test->test2();
+	test->test3();
+	test->test4();
+	test->test5();
 
-	Test test5;
-	Test test1;
+	delete test;
+#else
+	auto game = new Game(false);
+	game->run();
 
-	test1.test1();
-
-	//test5.test5();
+	delete game;
+#endif
 
     return 0;
 }

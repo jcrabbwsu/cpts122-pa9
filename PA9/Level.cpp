@@ -22,13 +22,11 @@ void Level::init() {
 }
 
 void Level::update(double deltaTime) {
-
-
-	if (spawnTimer % spawnFreqAsteroid == 0) {
+	if (spawnFreqAsteroid > 0 && spawnTimer % spawnFreqAsteroid == 0) {
 		// Spawn an asteroid based on spawnFreqAsteroid
 		spawnNewHostile(1);
 	}
-	if (spawnTimer % spawnFreqUFO == 0) {
+	if (spawnFreqUFO > 0 && spawnTimer % spawnFreqUFO == 0) {
 		// Spawn a UFO based on UFO spawnFreqUFO
 		spawnNewHostile(2);
 	}
@@ -93,7 +91,10 @@ sf::FloatRect Level::getBounds() {
 	return sf::FloatRect();
 }
 
-void Level::setSpawnRateUFO(int rate)
-{
+void Level::setSpawnRateUFO(int rate) {
 	spawnFreqUFO = rate;
+}
+
+void Level::setAsteroidSpawnRate(int rate) {
+	spawnFreqAsteroid = rate;
 }

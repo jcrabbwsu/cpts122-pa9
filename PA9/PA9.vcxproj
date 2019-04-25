@@ -17,6 +17,14 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="UnitTests|Win32">
+      <Configuration>UnitTests</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="UnitTests|x64">
+      <Configuration>UnitTests</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{88BFB8BF-9FBA-4DDC-8546-6D37EB81A345}</ProjectGuid>
@@ -51,6 +59,12 @@
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='UnitTests|Win32'">
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='UnitTests|x64'">
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -159,7 +173,9 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="ScoreSubmissionScreen.cpp" />
-    <ClCompile Include="ScoreSubmitter.cpp" />
+    <ClCompile Include="ScoreSubmitter.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='UnitTests|Win32'">TEST</PreprocessorDefinitions>
+    </ClCompile>
     <ClCompile Include="ScoreViewScreen.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="Test.cpp" />

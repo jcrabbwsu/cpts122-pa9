@@ -18,7 +18,7 @@ class ScoreSubmitter {
 	Game *game;
 
 public:
-	ScoreSubmitter(Game *game);
+	ScoreSubmitter(Game *game, bool testing);
 	~ScoreSubmitter();
 
 	void submitScore(std::string initials, int score);

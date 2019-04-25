@@ -36,7 +36,7 @@ class Game {
 	void initScoreViewScreen();
 
 public:
-	Game();
+	Game(bool testing);
 	~Game();
 	
 	/// <summary>

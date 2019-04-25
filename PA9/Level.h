@@ -52,4 +52,5 @@ public:
 	const sf::Vector2f &randomVector();
 	sf::FloatRect getBounds();
 	void setSpawnRateUFO(int rate);
+	void setAsteroidSpawnRate(int rate);
 };

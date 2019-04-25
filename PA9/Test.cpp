@@ -9,61 +9,86 @@ Test::~Test()
 }
 
 //Hannah's attempt at test code --> you can blame her for this function
-void Test::test1()
-{
-	////set up test window
-	//sf::RenderWindow testWindow (sf::VideoMode(1200, 800), "AsteroidsTest");
-
-	////keep window open until user closes it
-	//while (testWindow.isOpen())
-	//{
-	//	sf::Event event;
-	//	while (testWindow.pollEvent(event))
-	//	{
-	//		if (event.type == sf::Event::Closed)
-	//			testWindow.close();
-	//	}
-
-	//	Asteroid testAsteroid();
-
-	//	testWindow.draw(testAsteroid);
-	//}
-
+void Test::test1() {
 	sf::Clock timer;
-	sf::Time deltatime;
-	new Asteroid();
+	sf::Time deltatime = timer.getElapsedTime();
 
 	//set up test window
-	Game* game = new Game;
+	Game* game = new Game(true);
 	game->transitionToGame();
 
 	game->getLevel()->spawnNewHostile();
 
 	while (timer.getElapsedTime().asSeconds() < 10)
 	{
-	game->render(deltatime);
-
+		game->render(deltatime);
 	}
+
+	delete game;
 }
 
-void Test::test2()
-{
+void Test::test2() {
+	sf::Clock timer;
+	sf::Time deltatime = timer.getElapsedTime();
+
+	Game* game = new Game(true);
+	game->transitionToGame();
+
+	game->getLevel()->setSpawnRateUFO(0);
+	game->getLevel()->setAsteroidSpawnRate(0);
+
+	while (timer.getElapsedTime().asSeconds() < 10) {
+		game->getLevel()->addChildGameObject(new Asteroid());
+		game->getLevel()->getScoreboard()->setLives(100);
+		game->render(deltatime);
+	}
+
+	delete game;
 }
 
-void Test::test3()
-{
+void Test::test3() {
+	sf::Clock timer;
+	sf::Time deltatime = timer.getElapsedTime();
+
+	Game* game = new Game(true);
+	game->transitionToGame();
+
+	game->getLevel()->setSpawnRateUFO(0);
+	game->getLevel()->setAsteroidSpawnRate(0);
+
+	while (timer.getElapsedTime().asSeconds() < 10) {
+		game->getLevel()->addChildGameObject(new UFO());
+		game->getLevel()->getScoreboard()->setLives(100);
+		game->render(deltatime);
+	}
+
+	delete game;
 }
 
-void Test::test4()
-{
+void Test::test4() {
+	sf::Clock timer;
+	sf::Time deltatime = timer.getElapsedTime();
+
+	Game* game = new Game(true);
+	game->transitionToGame();
+
+	game->getLevel()->setSpawnRateUFO(10000);
+	game->getLevel()->setAsteroidSpawnRate(10000);
+
+	while (timer.getElapsedTime().asSeconds() < 10) {
+		game->getLevel()->addChildGameObject(new UFO());
+		game->getLevel()->getScoreboard()->setLives(100);
+		game->render(deltatime);
+	}
+
+	delete game;
 }
 
-void Test::test5()
-{
+void Test::test5() {
 	sf::Clock timer;
 	sf::Time deltatime;
 
-	Game* game = new Game;
+	Game* game = new Game(true);
 	game->transitionToGame();
 
 	game->getLevel()->setSpawnRateUFO(200);
