@@ -10,6 +10,7 @@ Test::~Test()
 
 void Test::test1()
 {
+	new Asteroid();
 }
 
 void Test::test2()
