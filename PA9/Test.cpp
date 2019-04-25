@@ -72,13 +72,18 @@ void Test::test4() {
 	Game* game = new Game(true);
 	game->transitionToGame();
 
-	game->getLevel()->setSpawnRateUFO(10000);
-	game->getLevel()->setAsteroidSpawnRate(10000);
+	game->getLevel()->setAsteroidSpawnRate(0);
+
+	int startingLives = game->getLevel()->getScoreboard()->getLives();
 
 	while (timer.getElapsedTime().asSeconds() < 10) {
-		game->getLevel()->addChildGameObject(new UFO());
-		game->getLevel()->getScoreboard()->setLives(100);
 		game->render(deltatime);
+	}
+
+	int newLives = game->getLevel()->getScoreboard()->getLives();
+	if (startingLives == newLives) {
+		std::cerr << "Lives test failed" << std::endl;
+		abort();
 	}
 
 	delete game;
