@@ -51,4 +51,5 @@ public:
 	void updateSpawnFreq();
 	const sf::Vector2f &randomVector();
 	sf::FloatRect getBounds();
+	void setSpawnRateUFO(int rate);
 };

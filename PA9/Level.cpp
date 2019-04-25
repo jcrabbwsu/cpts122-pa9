@@ -22,6 +22,8 @@ void Level::init() {
 }
 
 void Level::update(double deltaTime) {
+
+
 	if (spawnTimer % spawnFreqAsteroid == 0) {
 		// Spawn an asteroid based on spawnFreqAsteroid
 		spawnNewHostile(1);
@@ -89,4 +91,9 @@ const sf::Vector2f & Level::randomVector() {
 
 sf::FloatRect Level::getBounds() {
 	return sf::FloatRect();
+}
+
+void Level::setSpawnRateUFO(int rate)
+{
+	spawnFreqUFO = rate;
 }
