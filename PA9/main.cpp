@@ -1,6 +1,9 @@
+#pragma once
+
 #include "Game.h"
 
 #include "Menu.h"
+#include "Test.h"
 
 /// <summary>
 /// Entry point of the application
@@ -11,10 +14,17 @@
 int main(void) {
 	srand((unsigned int)time(NULL));
 
-	auto game = new Game();
-	game->run();
+	//auto game = new Game();
+	//game->run();
 
-	delete game;
+	//delete game;
+
+	Test test5;
+	Test test1;
+
+	test1.test1();
+
+	//test5.test5();
 
     return 0;
 }
